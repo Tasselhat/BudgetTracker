@@ -28,7 +28,6 @@ export default class Navbar extends React.Component {
   render() {
     return (
       <div>
-        <IconContext.Provider value={{ color: "#aaF" }}>
           <div className="navbar">
             <Link to="#" className="menu-bars">
               <FaIcons.FaBars onClick={() => this.showSidebar()} />
@@ -75,7 +74,6 @@ export default class Navbar extends React.Component {
               })}
             </ul>
           </nav>
-        </IconContext.Provider>
       </div>
     );
   }
