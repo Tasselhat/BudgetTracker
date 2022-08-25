@@ -1,6 +1,6 @@
 .tracker-rings-container {
     height: 100vh;
-    background-color: rgb(124, 124, 151);
+    background-color: rgba(124, 124, 134, 1);
     display: flex;
 }
 

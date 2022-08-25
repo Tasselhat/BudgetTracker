@@ -55,9 +55,11 @@ export default class TrackerRings extends React.Component {
         <div>
           <form onSubmit={this.handleSubmit}>
             <h3>Enter your expenses</h3>
+            <label htmlFor="label">Expense</label>
             <input
               name="label"
               type="text"
+              autoComplete="off"
               value={this.state.label}
               onChange={this.handleInputChange}
             ></input>
@@ -69,9 +71,9 @@ export default class TrackerRings extends React.Component {
               value={this.state.percentage}
               onChange={this.handleInputChange}
             />
-            <label for="percentage">% or cost in $</label>
+            <label for="percentage">% </label><label htmlFor="cost">or cost in $</label>
             <input
-              name="value"
+              name="cost"
               type="number"
               min="0"
               max="1000000"
