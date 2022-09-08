@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./Components/Navbar.jsx";
-import "./index.css";
+import "./css/index.css";
 import Homepage from "./Pages/Homepage.jsx";
 import TrackerRings from "./BudgetTracker/TrackerRings.jsx";
 import RegistrationPage from "./Pages/RegistrationPage.jsx";

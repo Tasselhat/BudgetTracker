@@ -37,7 +37,7 @@ export const SidebarData = [
     },
     {
         title: 'Account',
-        path: '/profile',
+        path: '/login',
         icon: <AiIcons.AiFillSetting />,
         cName: 'nav-text'
     }

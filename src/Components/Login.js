@@ -107,7 +107,7 @@ export const Login = () => {
 					<p>
 						Need an account?
 						<br />
-						<Link to="/profile">Sign Up</Link>
+						<Link to="/register">Sign Up</Link>
 					</p>
 				</section>
 			)}

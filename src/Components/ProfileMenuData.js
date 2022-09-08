@@ -13,7 +13,7 @@ export const ProfileMenuData = [
     },
     {
         title: 'View Profile',
-        path: '/profile',
+        path: '/login',
         icon: <IoIcons.IoMdTabletPortrait />,
         cName: 'nav-text'
     },

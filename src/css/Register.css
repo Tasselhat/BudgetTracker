@@ -1,10 +1,10 @@
 .profileContainer {
-	background-color: rgba(124, 124, 134, 1);
+	background: no-repeat url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	min-height: 100vh;
+	min-height: calc(100vh - 80px);
 	padding: 1rem 0.5rem;
 }
 
@@ -41,12 +41,12 @@ h1 {
 }
 
 .loginContainer {
-	background-color: rgba(124, 124, 134, 1);
+	background: no-repeat url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	min-height: 100vh;
+	min-height: calc(100vh - 80px);
 	padding: 1rem 0.5rem;
 }
 

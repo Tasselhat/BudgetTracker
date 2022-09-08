@@ -4,7 +4,7 @@ import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData.js";
 import { ProfileMenuData } from "./ProfileMenuData.js";
-import "./Navbar.css";
+import "../css/Navbar.css";
 
 export default class Navbar extends React.Component {
 	constructor(props) {
