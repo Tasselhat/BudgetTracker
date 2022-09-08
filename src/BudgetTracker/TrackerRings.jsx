@@ -71,7 +71,7 @@ export default class TrackerRings extends React.Component {
               value={this.state.percentage}
               onChange={this.handleInputChange}
             />
-            <label for="percentage">% </label><label htmlFor="cost">or cost in $</label>
+            <label htmlFor="percentage">% </label><label htmlFor="cost">or cost in $</label>
             <input
               name="cost"
               type="number"

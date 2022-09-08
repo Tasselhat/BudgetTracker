@@ -101,7 +101,7 @@ export const Register = () => {
 					</p>
 				</section>
 			) : (
-				<section className="registrationForm">
+				<section className="registrationSection">
 					<p
 						ref={errRef}
 						className={errMsg ? "errmsg" : "offscreen"}

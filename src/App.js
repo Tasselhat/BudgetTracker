@@ -1,21 +1,33 @@
-import { Route, Link, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Navbar.jsx";
 import "./index.css";
 import Homepage from "./Pages/Homepage.jsx";
 import TrackerRings from "./BudgetTracker/TrackerRings.jsx";
-import Profile from "./Pages/Profile.jsx";
+import RegistrationPage from "./Pages/RegistrationPage.jsx";
+import LoginPage from "./Pages/LoginPage.jsx";
+import AdminDashboard from "./Pages/Admin";
+import Unauthorized from "./Pages/Unauthorized.jsx";
+import EditorDashboard from "./Pages/Editor.jsx";
+import Missing from "./Pages/Missing.jsx";
+import Layout from "./Pages/Layout.js";
 
 function App() {
-  return (
-    <div className="App">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/rings" element={<TrackerRings />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-    </div>
-  );
+	return (
+		<Routes>
+			<Route path="/" element={<Layout />}>
+				<Route path="register" element={<RegistrationPage />} />
+				<Route path="login" element={<LoginPage />} />
+				<Route path="unauthorized" element={<Unauthorized />} />
+
+				<Route path="/" element={<Homepage />} />
+				<Route path="rings" element={<TrackerRings />} />
+				<Route path="admin" element={<AdminDashboard />} />
+				<Route path="editor" element={<EditorDashboard />} />
+
+				<Route path="*" element={<Missing />} />
+			</Route>
+		</Routes>
+	);
 }
 
 export default App;
