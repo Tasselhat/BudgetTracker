@@ -9,6 +9,7 @@ import Unauthorized from "./Pages/Unauthorized.jsx";
 import EditorDashboard from "./Pages/Editor.jsx";
 import Missing from "./Pages/Missing.jsx";
 import Layout from "./Pages/Layout.js";
+import RequireAuth from "./Components/RequireAuth";
 
 function App() {
 	return (
@@ -18,10 +19,16 @@ function App() {
 				<Route path="login" element={<LoginPage />} />
 				<Route path="unauthorized" element={<Unauthorized />} />
 
-				<Route path="/" element={<Homepage />} />
-				<Route path="rings" element={<TrackerRings />} />
-				<Route path="admin" element={<AdminDashboard />} />
-				<Route path="editor" element={<EditorDashboard />} />
+				<Route element={<RequireAuth allowedRoles={[2001]} />}>
+					<Route path="/" element={<Homepage />} />
+					<Route path="rings" element={<TrackerRings />} />
+				</Route>
+				<Route element={<RequireAuth allowedRoles={[5150, 3005, 7776]} />}>
+					<Route path="admin" element={<AdminDashboard />} />
+				</Route>
+				<Route element={<RequireAuth allowedRoles={[1984, 3005, 7776]} />}>
+					<Route path="editor" element={<EditorDashboard />} />
+				</Route>
 
 				<Route path="*" element={<Missing />} />
 			</Route>

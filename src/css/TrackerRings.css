@@ -1,0 +1,17 @@
+.tracker-rings-container {
+	height: 100vh;
+	background-color: rgba(124, 124, 134, 1);
+	display: flex;
+}
+
+.container {
+	height: 45%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.graph {
+	height: 45vh;
+	width: 70vw;
+}

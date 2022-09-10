@@ -1,13 +1,15 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from "../context/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "../api/axios";
+import useAuth from "../hooks/useAuth";
 
 const LOGIN_URL = "./auth";
 
 export const Login = () => {
-	const { setAuth } = useContext(AuthContext);
+	const { setAuth } = useAuth();
 	const navigate = useNavigate();
+	const location = useLocation();
+	const from = location.state?.from?.pathname || "/";
 	const userRef = useRef();
 	const errRef = useRef();
 
@@ -39,13 +41,13 @@ export const Login = () => {
 			console.log(JSON.stringify(response?.data));
 			const accessToken = response?.data?.accessToken;
 			const roles = response?.data?.roles;
-			setAuth({ user, pwd, roles, accessToken})
+			setAuth({ user, pwd, roles, accessToken });
 			setUser("");
 			setPwd("");
 			setSucess(true);
 			setTimeout(() => {
-				navigate("/rings", { replace: true });
-			}, 3500);
+				navigate(from, { replace: true });
+			}, 1500);
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg("No Server Response");
@@ -54,7 +56,7 @@ export const Login = () => {
 			} else if (err.response?.status === 401) {
 				setErrMsg("Unauthorized, incorrect username or password.");
 			} else {
-				setErrMsg("Login failed")
+				setErrMsg("Login failed");
 			}
 			errRef.current.focus();
 			console.error(err);

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import drawChart from "./drawChart";
-import "./TrackerRings.css";
+import "../css/TrackerRings.css";
 
 const DonutChart = ({ data }) => {
   const ref = useRef(null);

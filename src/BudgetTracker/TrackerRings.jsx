@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ChartComponent from "./ChartComponent";
-import "./TrackerRings.css";
+import "../css/TrackerRings.css";
 
 const data = [
   { label: "rent", value: 600 },
@@ -82,6 +82,7 @@ export default class TrackerRings extends React.Component {
             />
             <input type="submit" value="Submit"></input>
           </form>
+          <h1><Link to="/admin">Admin</Link></h1>
         </div>
       </div>
     );
