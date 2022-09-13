@@ -10,6 +10,7 @@ import EditorDashboard from "./Pages/Editor.jsx";
 import Missing from "./Pages/Missing.jsx";
 import Layout from "./Pages/Layout.js";
 import RequireAuth from "./Components/RequireAuth";
+import Logout from "./Components/Logout";
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 				<Route path="register" element={<RegistrationPage />} />
 				<Route path="login" element={<LoginPage />} />
 				<Route path="unauthorized" element={<Unauthorized />} />
+				<Route path="logout" element={<Logout />} />
 
 				<Route element={<RequireAuth allowedRoles={[2001]} />}>
 					<Route path="/" element={<Homepage />} />

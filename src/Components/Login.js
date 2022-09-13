@@ -109,7 +109,11 @@ export const Login = () => {
 					<p>
 						Need an account?
 						<br />
-						<Link to="/register">Sign Up</Link>
+						<span className="line">
+							<Link to="/register">
+								<u>Sign Up</u>
+							</Link>
+						</span>
 					</p>
 				</section>
 			)}

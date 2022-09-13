@@ -25,7 +25,7 @@ export const ProfileMenuData = [
     },
     {
         title: 'Log Out',
-        path: '#',
+        path: '/logout',
         icon: <IoIcons.IoMdLogOut />,
         cName: 'nav-text'
     }
