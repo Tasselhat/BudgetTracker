@@ -52,7 +52,7 @@ export const Register = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		//button hacking? hmm...
+		//button hacking?
 		const v1 = USER_REGEX.test(user);
 		const v2 = PWD_REGEX.test(pwd);
 		if (!v1 || !v2) {

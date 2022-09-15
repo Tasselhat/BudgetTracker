@@ -1,7 +1,11 @@
 .tracker-rings-container {
-	height: 100vh;
+	height: calc(100vh - 80px);
 	background-color: rgba(124, 124, 134, 1);
 	display: flex;
+}
+
+.chart-container {
+	width: 50vw;
 }
 
 .container {
