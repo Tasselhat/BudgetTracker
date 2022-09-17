@@ -9,7 +9,7 @@ export default function Unauthorized() {
 	return (
 		<section>
 			<h1>Acess Denied</h1>
-      <p>You do not have access to the requested page</p>
+			<p>You do not have access to the requested page</p>
 			<div>
 				<button onClick={goBack}>Take Me Back</button>
 			</div>

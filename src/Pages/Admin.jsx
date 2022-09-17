@@ -1,25 +1,25 @@
 import React from "react";
 import { useState } from "react";
 import Users from "../Components/Users";
-import { Link } from "react-router-dom";
 
 export default function AdminDashboard() {
 	const [displayUsers, setDisplayUsers] = useState(true);
-	const [displayEmployees, setDisplayEmployees] = useState(false);
+	const [displayBudgets, setDisplayBudgets] = useState(false);
 
 	return (
 		<>
+			<h1>Admin Dashboard</h1>
 			{displayUsers ? (
 				<section>
 					<Users />
 				</section>
-			) : displayEmployees ? (
+			) : displayBudgets ? (
 				<section>
-					<h2>Employees</h2>
+					<div />
 				</section>
 			) : (
 				<section>
-					<h1>Admin Dashboard</h1>
+					<h1>Tools go here</h1>
 					<br />
 				</section>
 			)}

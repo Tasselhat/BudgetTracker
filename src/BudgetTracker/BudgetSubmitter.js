@@ -6,12 +6,16 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const SAVINGS_URL = "/savings";
 const EXPENSE_URL = "/expenses";
+const BUDGET_URL = "/budgets";
 const controller = new AbortController();
 
 export const BudgetSubmitter = () => {
 	const expenseRef = useRef();
 	const savingRef = useRef();
 	const errRef = useRef();
+
+	const [income, setIncome] = useState(0);
+	const [incomeFocus, setIncomeFocus] = useState(false);
 
 	const [expenseName, setExpenseName] = useState("Example: Rent");
 	const [expensePercentage, setExpensePercentage] = useState(0);
@@ -50,12 +54,18 @@ export const BudgetSubmitter = () => {
 
 	const handleSubmitExpense = async (e) => {
 		e.preventDefault(e);
-		if (!expenseName || ((!expenseFlatCost && !expensePercentage) || (expenseFlatCost === "0" && expensePercentage === "0"))) {
-			setErrMsg("Please include a name for your expense and a percentage of your income or dollar amount for how much you spend/wish to spend on that expense each month");
+		if (
+			!expenseName ||
+			(!expenseFlatCost && !expensePercentage) ||
+			(expenseFlatCost === "0" && expensePercentage === "0")
+		) {
+			setErrMsg(
+				"Please include a name for your expense and a percentage of your income or dollar amount for how much you spend/wish to spend on that expense each month"
+			);
 			return;
 		}
 		try {
-			const response = await axiosPrivate.post(
+			const response = await axiosPrivate.put(
 				EXPENSE_URL,
 				JSON.stringify({ expenseName, expensePercentage, expenseFlatCost }),
 				{
@@ -66,7 +76,7 @@ export const BudgetSubmitter = () => {
 			);
 			console.log(response.data);
 			alert("An expense was submitted: " + expenseName);
-			// reset input fields to stop multiple post requests
+			// reset input fields to stop multiple put requests
 			setExpenseName("Example: Rent");
 			setExpensePercentage(0);
 			setExpenseFlatCost(0);
@@ -78,7 +88,6 @@ export const BudgetSubmitter = () => {
 			} else if (err.response?.status === 409) {
 				setErrMsg("An expense with this name already exists.");
 				console.error(err);
-				//navigate("/login", { state: { from: location }, replace: true });
 			} else {
 				setErrMsg("Submission Failed");
 				console.error(err);
@@ -91,7 +100,7 @@ export const BudgetSubmitter = () => {
 	const handleSubmitSaving = async (e) => {
 		e.preventDefault(e);
 		try {
-			const response = await axiosPrivate.post(
+			const response = await axiosPrivate.put(
 				SAVINGS_URL,
 				JSON.stringify({ savingName, savingPercentage, savingFlatCost }),
 				{
@@ -102,7 +111,7 @@ export const BudgetSubmitter = () => {
 			);
 			console.log(response.data);
 			alert("A saving/investment type was submitted: " + savingName);
-			// clear input fields to stop multiple post requests
+			// clear input fields to stop multiple put requests
 			setExpenseName("Example: Retirement (401k)");
 			setExpensePercentage(0);
 			setExpenseFlatCost(0);
@@ -114,7 +123,39 @@ export const BudgetSubmitter = () => {
 			} else if (err.response?.status === 409) {
 				setErrMsg("A saving/investment with this name already exists.");
 				console.error(err);
+			} else {
+				setErrMsg("Submission Failed");
+				console.error(err);
 				navigate("/login", { state: { from: location }, replace: true });
+			}
+			errRef.current.focus();
+		}
+	};
+
+	const handleSubmitIncome = async (e) => {
+		e.preventDefault(e);
+		try {
+			const response = await axiosPrivate.put(
+				BUDGET_URL,
+				JSON.stringify({ income }),
+				{
+					headers: { "Content-Type": "application/json" },
+					withCredentials: true,
+					signal: controller.signal,
+				}
+			);
+			console.log(response.data);
+			alert("Income was submitted: $" + income);
+			// clear input fields to stop multiple put requests
+			setIncome(0);
+		} catch (err) {
+			if (!err?.response) {
+				setErrMsg("No response from the server");
+				console.error(err);
+				navigate("/login", { state: { from: location }, replace: true });
+			} else if (err.response?.status === 400) {
+				setErrMsg("Income value is required.");
+				console.error(err);
 			} else {
 				setErrMsg("Submission Failed");
 				console.error(err);
@@ -131,8 +172,8 @@ export const BudgetSubmitter = () => {
 					{errMsg}
 				</p>
 				<form onSubmit={(e) => handleSubmitExpense(e)}>
-					<h3>Enter your expenses</h3>
-					<label htmlFor="expenseName">Expense</label>
+					<h3>Enter an expense</h3>
+					<label htmlFor="expenseName">Expense: </label>
 
 					<input
 						type="text"
@@ -158,7 +199,7 @@ export const BudgetSubmitter = () => {
 						onFocus={() => setExpensePercentageFocus(true)}
 						onBlur={() => setExpensePercentageFocus(false)}
 					/>
-					<label htmlFor="expensePercentage">% </label>
+					<label htmlFor="expensePercentage">% of income </label>
 					<label htmlFor="expenseFlatCost">or cost in $</label>
 					<input
 						name="expenseFlatCost"
@@ -174,7 +215,10 @@ export const BudgetSubmitter = () => {
 					/>
 					<input
 						disabled={
-							!expenseName || ((expensePercentage === "0" && expenseFlatCost === "0") || (expensePercentage === "" || expenseFlatCost === ""))
+							!expenseName ||
+							(expensePercentage === "0" && expenseFlatCost === "0") ||
+							expensePercentage === "" ||
+							expenseFlatCost === ""
 								? true
 								: false
 						}
@@ -184,8 +228,8 @@ export const BudgetSubmitter = () => {
 					/>
 				</form>
 				<form onSubmit={(e) => handleSubmitSaving(e)}>
-					<h3>Enter your saving/investment</h3>
-					<label htmlFor="savingName">Savings</label>
+					<h3>Enter a saving/investment</h3>
+					<label htmlFor="savingName">Saving: </label>
 					<input
 						name="savingName"
 						type="text"
@@ -211,13 +255,13 @@ export const BudgetSubmitter = () => {
 						onFocus={() => setSavingPercentageFocus(true)}
 						onBlur={() => setSavingPercentageFocus(false)}
 					/>
-					<label htmlFor="savingPercentage">% </label>
+					<label htmlFor="savingPercentage">% of savings fund </label>
 					<label htmlFor="savingFlatCost">or amount in $</label>
 					<input
 						name="savingFlatCost"
 						type="number"
 						min="0"
-						max="1000000"
+						max="100000000"
 						id="savingFlatCost"
 						autoComplete="off"
 						value={savingFlatCost}
@@ -227,14 +271,39 @@ export const BudgetSubmitter = () => {
 					/>
 					<input
 						disabled={
-							!savingName || ((savingPercentage === "0" && savingFlatCost === "0") || (savingPercentage === "" || savingFlatCost === ""))
+							!savingName ||
+							(savingPercentage === "0" && savingFlatCost === "0") ||
+							savingPercentage === "" ||
+							savingFlatCost === ""
 								? true
 								: false
 						}
 						type="submit"
 						value="Submit"
 						onSubmit={(e) => handleSubmitSaving(e)}
-					></input>
+					/>
+				</form>
+				<form onSubmit={(e) => handleSubmitIncome(e)}>
+					<h3>Enter your income</h3>
+					<label htmlFor="savingName">Income $</label>
+					<input
+						name="income"
+						type="number"
+						min="0"
+						id="income"
+						autoComplete="off"
+						value={income}
+						onChange={(e) => setIncome(e.target.value)}
+						required
+						onFocus={() => setIncomeFocus(true)}
+						onBlur={() => setIncomeFocus(false)}
+					/>
+					<input
+						disabled={!income || income === 0 ? true : false}
+						type="submit"
+						value="Submit"
+						onSubmit={(e) => handleSubmitIncome(e)}
+					/>
 				</form>
 			</div>
 		</>

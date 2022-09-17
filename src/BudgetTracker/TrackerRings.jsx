@@ -1,7 +1,8 @@
 import React from "react";
-import ChartComponent from "./ChartComponent";
 import "../css/TrackerRings.css";
 import { BudgetSubmitter } from "./BudgetSubmitter";
+import ChartComponent from "./ChartComponent";
+import GetBudget from "./GetBudget";
 
 const data = [
 	{ label: "rent", value: 600 },
@@ -42,7 +43,7 @@ export default class TrackerRings extends React.Component {
 		return (
 			<div className="tracker-rings-container">
 				<div className="chart-container">
-					<ChartComponent data={data} />
+					<GetBudget />
 					<ChartComponent data={savingsData} />
 				</div>
 				<section>
