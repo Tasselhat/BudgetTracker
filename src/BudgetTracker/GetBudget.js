@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import ChartComponent from "./ChartComponent";
@@ -42,7 +42,8 @@ const GetBudget = () => {
 				if (income && income > 0) {
 					for (let i = 0; i < expensesArrayLength; i++) {
 						const percentageValue =
-							income * (budgetObject.expenses[i].expensePercentage / 100);
+							income *
+							Math.round(budgetObject.expenses[i].expensePercentage / 100);
 						const flatCostValue = budgetObject.expenses[i].expenseFlatCost;
 						if (percentageValue > flatCostValue) {
 							chartData.push({
@@ -64,9 +65,8 @@ const GetBudget = () => {
 						});
 					}
 				}
-				console.log(chartData);
-				console.log(data);
 				setChartData(chartData);
+				console.log(chartData);
 			} catch (err) {
 				console.error(err);
 				navigate("/login", { state: { from: location }, replace: true });
@@ -83,7 +83,7 @@ const GetBudget = () => {
 
 	return (
 		<section>
-			{chartData?.length ? (
+			{chartData ? (
 				<>
 					<ChartComponent data={chartData} />
 				</>

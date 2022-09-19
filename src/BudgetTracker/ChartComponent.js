@@ -4,7 +4,6 @@ import "../css/TrackerRings.css";
 
 const DonutChart = ({ data }) => {
 	const ref = useRef(null);
-	console.log(data + " Chart Component");
 
 	useEffect(() => {
 		if (ref.current) {

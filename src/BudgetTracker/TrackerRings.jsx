@@ -25,19 +25,11 @@ export default class TrackerRings extends React.Component {
 		super(props);
 
 		this.state = {};
-
-		this.handleInputChange = this.handleInputChange.bind(this);
 	}
 
-	handleInputChange(event) {
-		const target = event.target;
-		const value = target.value;
-		const name = target.name;
-
-		this.setState({
-			[name]: value,
-		});
-	}
+	handleClick = () => {
+		this.forceUpdate();
+	};
 
 	render() {
 		return (
@@ -45,6 +37,7 @@ export default class TrackerRings extends React.Component {
 				<div className="chart-container">
 					<GetBudget />
 					<ChartComponent data={savingsData} />
+					<button onClick={(e) => this.handleClick(e)}>Update</button>
 				</div>
 				<section>
 					<BudgetSubmitter />
