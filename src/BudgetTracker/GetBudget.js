@@ -4,18 +4,24 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import ChartComponent from "./ChartComponent";
 
 const data = [
-	{ label: "rent", value: 600 },
+	{ label: "rent", value: 1340 },
 	{ label: "utilites", value: 80 },
 	{ label: "food", value: 300 },
+	{ label: "car", value: 287 },
 	{ label: "entertainment", value: 80 },
-	{ label: "subscriptions", value: 20 },
-	{ label: "savings", value: 520 },
+	{ label: "subscriptions", value: 24 },
+	{ label: "Saving/Investments", value: 520 },
 	{ label: "misc", value: 100 },
+	{ label: "Extra Income", value: 234 },
 ];
 
 const GetBudget = () => {
 	const [budget, setBudget] = useState();
 	const [chartData, setChartData] = useState();
+	const [arrayExists, setArrayExists] = useState(false);
+	const [expensesExceedIncomeWarning, setExpensesExceedIncomeWarning] =
+		useState("");
+	const [noIncomeWarning, setNoIncomeWarning] = useState("");
 	const axiosPrivate = useAxiosPrivate();
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -33,17 +39,64 @@ const GetBudget = () => {
 				isMounted && setBudget(response.data);
 				const chartData = [];
 				const budgetObject = response.data;
+				if (!budgetObject) return setArrayExists(false);
+
 				const income = budgetObject.income;
-				//add savings as a percent of income or flat $ amount to make saving chart.
+				const savingsObject = budgetObject.saving;
+				const savingTotalAmount = !savingsObject ? 0 : savingsObject.total;
+				const savingPercentOfIncome = !savingsObject
+					? 0
+					: savingsObject.percent;
+
 				const expensesArrayLength = Object.keys(budgetObject.expenses).length;
-				const savingsArrayLength = Object.keys(budgetObject.savings).length;
+				if (expensesArrayLength > 0) {
+					setArrayExists(true);
+				}
 				console.log(expensesArrayLength);
-				console.log(savingsArrayLength);
-				if (income && income > 0) {
+				if (savingTotalAmount && savingPercentOfIncome) {
+					const savingAsPerecentOfIncome = Math.round(
+						income * (savingPercentOfIncome / 100)
+					);
+					if (savingAsPerecentOfIncome > savingTotalAmount) {
+						chartData.push({
+							label: "Saving/Investments",
+							value: savingAsPerecentOfIncome,
+						});
+					} else {
+						chartData.push({
+							label: "Saving/Investments",
+							value: savingTotalAmount,
+						});
+					}
+				} else if (!savingTotalAmount) {
+					const savingAsPerecentOfIncome = Math.round(
+						income * (savingPercentOfIncome / 100)
+					);
+					chartData.push({
+						label: "Saving/Investments",
+						value: savingAsPerecentOfIncome,
+					});
+				} else {
+					chartData.push({
+						label: "Saving/Investments",
+						value: savingTotalAmount,
+					});
+				}
+				if (!income) {
 					for (let i = 0; i < expensesArrayLength; i++) {
-						const percentageValue =
-							income *
-							Math.round(budgetObject.expenses[i].expensePercentage / 100);
+						chartData.push({
+							label: budgetObject.expenses[i].expenseName,
+							value: budgetObject.expenses[i].expenseFlatCost,
+						});
+					}
+					setNoIncomeWarning(
+						"Please enter your current income to properly display graph."
+					);
+				} else {
+					for (let i = 0; i < expensesArrayLength; i++) {
+						const percentageValue = Math.round(
+							income * (budgetObject.expenses[i].expensePercentage / 100)
+						);
 						const flatCostValue = budgetObject.expenses[i].expenseFlatCost;
 						if (percentageValue > flatCostValue) {
 							chartData.push({
@@ -57,13 +110,22 @@ const GetBudget = () => {
 							});
 						}
 					}
+				}
+				setChartData(chartData);
+				console.log(chartData);
+				const chartDataSum = chartData.reduce((accumulator, object) => {
+					return accumulator + object.value;
+				}, 0);
+				if (chartDataSum < income) {
+					const excess = income - chartDataSum;
+					chartData.push({
+						label: "Extra Income",
+						value: excess,
+					});
 				} else {
-					for (let i = 0; i < expensesArrayLength; i++) {
-						chartData.push({
-							label: budgetObject.expenses[i].expenseName,
-							value: budgetObject.expenses[i].expenseFlatCost,
-						});
-					}
+					setExpensesExceedIncomeWarning(
+						"Warning: Expenses currently exceed your entered income, consider reducing expenses, increasing monthly income, or adjusting any errors."
+					);
 				}
 				setChartData(chartData);
 				console.log(chartData);
@@ -81,19 +143,35 @@ const GetBudget = () => {
 		};
 	}, [axiosPrivate]);
 
-	return (
-		<section>
-			{chartData ? (
+	if (arrayExists) {
+		return (
+			<section>
 				<>
+					<h2>Breakdown of expenses</h2>
 					<ChartComponent data={chartData} />
+					<p
+						className={noIncomeWarning ? "errmsg" : "offscreen"}
+						aria-live="assertive"
+					>
+						{noIncomeWarning}
+					</p>
+					<p
+						className={expensesExceedIncomeWarning ? "errmsg" : "offscreen"}
+						aria-live="assertive"
+					>
+						{expensesExceedIncomeWarning}
+					</p>
 				</>
-			) : (
-				<>
-					<ChartComponent data={data} />
-				</>
-			)}
-		</section>
-	);
+			</section>
+		);
+	} else {
+		return (
+			<>
+				<h2>Example chart:</h2>
+				<ChartComponent data={data} />
+			</>
+		);
+	}
 };
 
 export default GetBudget;

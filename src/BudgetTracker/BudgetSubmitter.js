@@ -191,11 +191,11 @@ export const BudgetSubmitter = () => {
 	const handleSubmitSavingAmount = async (e) => {
 		e.preventDefault(e);
 		if (
-			!totalSavingAmount || !totalSavingPercent ||
+			(!totalSavingAmount && !totalSavingPercent) ||
 			(totalSavingAmount == 0 && totalSavingPercent == 0)
 		) {
 			setErrMsg(
-				"Please include a name for your saving/investment and a percentage of your income or dollar amount for how much you wish to invest in this saving/investment each month"
+				"Please include a percentage of your income or dollar amount for how much you wish to invest in this saving/investment each month"
 			);
 			return;
 		}
@@ -213,7 +213,7 @@ export const BudgetSubmitter = () => {
 			if (totalSavingPercent && totalSavingPercent > 0) {
 				alert("Saving submitted: " + totalSavingPercent + "% of each paycheck");
 			} else {
-				alert("Saving amount was submitted: $" + totalSavingAmount + "of each paycheck");
+				alert("Saving amount was submitted: $" + totalSavingAmount + " of each paycheck");
 			}
 			// clear input fields to stop multiple put requests
 			setTotalSavingAmount(0);
@@ -241,6 +241,29 @@ export const BudgetSubmitter = () => {
 				<p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
 					{errMsg}
 				</p>
+				<form onSubmit={(e) => handleSubmitIncome(e)}>
+					<h3>Enter this months income</h3>
+					<label htmlFor="income">Income $</label>
+					<input
+						name="income"
+						type="number"
+						min="0"
+						max="1000000000"
+						id="income"
+						autoComplete="off"
+						value={income}
+						onChange={(e) => setIncome(e.target.value)}
+						required
+						onFocus={() => setIncomeFocus(true)}
+						onBlur={() => setIncomeFocus(false)}
+					/>
+					<input
+						disabled={!income || income === 0 ? true : false}
+						type="submit"
+						value="Submit"
+						onSubmit={(e) => handleSubmitIncome(e)}
+					/>
+				</form>
 				<form onSubmit={(e) => handleSubmitExpense(e)}>
 					<h3>Enter an expense</h3>
 					<label htmlFor="expenseName">Expense: </label>
@@ -286,7 +309,7 @@ export const BudgetSubmitter = () => {
 					<input
 						disabled={
 							!expenseName ||
-							(expensePercentage === "0" && expenseFlatCost === "0") ||
+							(expensePercentage == 0 && expenseFlatCost == 0) ||
 							expensePercentage === "" ||
 							expenseFlatCost === ""
 								? true
@@ -295,6 +318,49 @@ export const BudgetSubmitter = () => {
 						type="submit"
 						value="Submit"
 						onSubmit={(e) => handleSubmitExpense(e)}
+					/>
+				</form>
+				<form onSubmit={(e) => handleSubmitSavingAmount(e)}>
+					<h3>How much would you like to save from each paycheck?</h3>
+					<label htmlFor="totalSavingAmount">Save a total of $</label>
+					<input
+						name="totalSavingAmount"
+						type="number"
+						min="0"
+						id="totalSavingAmount"
+						autoComplete="off"
+						value={totalSavingAmount}
+						onChange={(e) => setTotalSavingAmount(e.target.value)}
+						required
+						onFocus={() => setTotalSavingAmountFocus(true)}
+						onBlur={() => setTotalSavingAmountFocus(false)}
+					/>
+					<p> or </p>
+					<input
+						name="totalSavingPercent"
+						type="number"
+						min="0"
+						max="100"
+						id="totalSavingPercent"
+						autoComplete="off"
+						value={totalSavingPercent}
+						onChange={(e) => setTotalSavingPercent(e.target.value)}
+						required
+						onFocus={() => setTotalSavingPercentFocus(true)}
+						onBlur={() => setTotalSavingPercentFocus(false)}
+					/>
+					<label htmlFor="totalSaving Percent">% of each paycheck.</label>
+					<input
+						disabled={
+							(totalSavingPercent == 0 && totalSavingAmount == 0) ||
+							totalSavingPercent === "" ||
+							totalSavingAmount === ""
+								? true
+								: false
+						}
+						type="submit"
+						value="Submit"
+						onSubmit={(e) => handleSubmitIncome(e)}
 					/>
 				</form>
 				<form onSubmit={(e) => handleSubmitSaving(e)}>
@@ -342,7 +408,7 @@ export const BudgetSubmitter = () => {
 					<input
 						disabled={
 							!savingName ||
-							(savingPercentage === "0" && savingFlatCost === "0") ||
+							(savingPercentage == 0 && savingFlatCost == 0) ||
 							savingPercentage === "" ||
 							savingFlatCost === ""
 								? true
@@ -351,72 +417,6 @@ export const BudgetSubmitter = () => {
 						type="submit"
 						value="Submit"
 						onSubmit={(e) => handleSubmitSaving(e)}
-					/>
-				</form>
-				<form onSubmit={(e) => handleSubmitIncome(e)}>
-					<h3>Enter your income</h3>
-					<label htmlFor="income">Income $</label>
-					<input
-						name="income"
-						type="number"
-						min="0"
-						max="1000000000"
-						id="income"
-						autoComplete="off"
-						value={income}
-						onChange={(e) => setIncome(e.target.value)}
-						required
-						onFocus={() => setIncomeFocus(true)}
-						onBlur={() => setIncomeFocus(false)}
-					/>
-					<input
-						disabled={!income || income === 0 ? true : false}
-						type="submit"
-						value="Submit"
-						onSubmit={(e) => handleSubmitIncome(e)}
-					/>
-				</form>
-				<form onSubmit={(e) => handleSubmitSavingAmount(e)}>
-					<h3>How much would you like to save from each paycheck?</h3>
-					<label htmlFor="totalSavingAmount">Save a total of $</label>
-					<input
-						name="totalSavingAmount"
-						type="number"
-						min="0"
-						id="totalSavingAmount"
-						autoComplete="off"
-						value={totalSavingAmount}
-						onChange={(e) => setTotalSavingAmount(e.target.value)}
-						required
-						onFocus={() => setTotalSavingAmountFocus(true)}
-						onBlur={() => setTotalSavingAmountFocus(false)}
-					/>
-					<p> or </p>
-					<input
-						name="totalSavingPercent"
-						type="number"
-						min="0"
-						max="100"
-						id="totalSavingPercent"
-						autoComplete="off"
-						value={totalSavingPercent}
-						onChange={(e) => setTotalSavingPercent(e.target.value)}
-						required
-						onFocus={() => setTotalSavingPercentFocus(true)}
-						onBlur={() => setTotalSavingPercentFocus(false)}
-					/>
-					<label htmlFor="totalSaving Percent">% of each paycheck.</label>
-					<input
-						disabled={
-							(totalSavingPercent === "0" && totalSavingAmount === "0") ||
-							totalSavingPercent === "" ||
-							totalSavingAmount === ""
-								? true
-								: false
-						}
-						type="submit"
-						value="Submit"
-						onSubmit={(e) => handleSubmitIncome(e)}
 					/>
 				</form>
 			</div>
