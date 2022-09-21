@@ -120,7 +120,7 @@ consider adjusting savings/investments amounts, increasing monthly income, or ad
 		return (
 			<section>
 				<>
-					<h2>Breakdown of Savings/investments</h2>
+					<h2>Breakdown of Savings/Investments:</h2>
 					<ChartComponent data={chartData} />
 					<p
 						className={noSavingWarning ? "errmsg" : "offscreen"}
@@ -140,7 +140,7 @@ consider adjusting savings/investments amounts, increasing monthly income, or ad
 	} else {
 		return (
 			<>
-				<h2>Example chart:</h2>
+				<h2>Example savings chart:</h2>
 				<ChartComponent data={savingsData} />
 			</>
 		);

@@ -9,7 +9,6 @@ const data = [
 	{ label: "food", value: 300 },
 	{ label: "car", value: 287 },
 	{ label: "entertainment", value: 80 },
-	{ label: "subscriptions", value: 24 },
 	{ label: "Saving/Investments", value: 520 },
 	{ label: "misc", value: 100 },
 	{ label: "Extra Income", value: 234 },
@@ -147,7 +146,7 @@ const GetBudget = () => {
 		return (
 			<section>
 				<>
-					<h2>Breakdown of expenses</h2>
+					<h2>Breakdown of expenses:</h2>
 					<ChartComponent data={chartData} />
 					<p
 						className={noIncomeWarning ? "errmsg" : "offscreen"}
@@ -167,7 +166,7 @@ const GetBudget = () => {
 	} else {
 		return (
 			<>
-				<h2>Example chart:</h2>
+				<h2>Example expenses chart:</h2>
 				<ChartComponent data={data} />
 			</>
 		);

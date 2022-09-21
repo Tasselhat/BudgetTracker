@@ -10,7 +10,7 @@ const BUDGET_URL = "/budgets";
 const controller = new AbortController();
 
 export const BudgetSubmitter = () => {
-	const expenseRef = useRef();
+	const incomeRef = useRef();
 	const savingRef = useRef();
 	const errRef = useRef();
 
@@ -26,14 +26,14 @@ export const BudgetSubmitter = () => {
 	const [expenseName, setExpenseName] = useState("Example: Rent");
 	const [expensePercentage, setExpensePercentage] = useState(0);
 	const [expenseFlatCost, setExpenseFlatCost] = useState(0);
-	const [expenseFocus, setExpenseFocus] = useState(true);
+	const [expenseNameFocus, setExpenseNameFocus] = useState(false);
 	const [expensePercentageFocus, setExpensePercentageFocus] = useState(false);
 	const [expenseFlatCostFocus, setExpenseFlatCostFocus] = useState(false);
 
 	const [savingName, setSavingName] = useState("Example: Retirement (401k)");
 	const [savingPercentage, setSavingPercentage] = useState(0);
 	const [savingFlatCost, setSavingFlatCost] = useState(0);
-	const [savingFocus, setSavingFocus] = useState(false);
+	const [savingNameFocus, setSavingNameFocus] = useState(false);
 	const [savingPercentageFocus, setSavingPercentageFocus] = useState(false);
 	const [savingFlatCostFocus, setSavingFlatCostFocus] = useState(false);
 
@@ -44,7 +44,7 @@ export const BudgetSubmitter = () => {
 	const [errMsg, setErrMsg] = useState("");
 
 	useEffect(() => {
-		expenseRef.current.focus();
+		incomeRef.current.focus();
 	}, []);
 
 	useEffect(() => {
@@ -213,7 +213,11 @@ export const BudgetSubmitter = () => {
 			if (totalSavingPercent && totalSavingPercent > 0) {
 				alert("Saving submitted: " + totalSavingPercent + "% of each paycheck");
 			} else {
-				alert("Saving amount was submitted: $" + totalSavingAmount + " of each paycheck");
+				alert(
+					"Saving amount was submitted: $" +
+						totalSavingAmount +
+						" of each paycheck"
+				);
 			}
 			// clear input fields to stop multiple put requests
 			setTotalSavingAmount(0);
@@ -251,6 +255,7 @@ export const BudgetSubmitter = () => {
 						max="1000000000"
 						id="income"
 						autoComplete="off"
+						ref={incomeRef}
 						value={income}
 						onChange={(e) => setIncome(e.target.value)}
 						required
@@ -258,27 +263,33 @@ export const BudgetSubmitter = () => {
 						onBlur={() => setIncomeFocus(false)}
 					/>
 					<input
-						disabled={!income || income === 0 ? true : false}
+						disabled={!income || income == 0 ? true : false}
 						type="submit"
 						value="Submit"
 						onSubmit={(e) => handleSubmitIncome(e)}
 					/>
+					<p
+						id="incomeNote"
+						className={incomeFocus && !income ? "instructions" : "offscreen"}
+					>
+						<FaIcons.FaInfoCircle />
+						Enter your monthly income <br />
+						Must be a whole number greater than 0. <br />
+					</p>
 				</form>
 				<form onSubmit={(e) => handleSubmitExpense(e)}>
 					<h3>Enter an expense</h3>
 					<label htmlFor="expenseName">Expense: </label>
-
 					<input
 						type="text"
 						id="expenseName"
 						name="expenseName"
-						ref={expenseRef}
 						autoComplete="off"
 						value={expenseName}
 						onChange={(e) => setExpenseName(e.target.value)}
 						required
-						onFocus={() => setExpenseFocus(true)}
-						onBlur={() => setExpenseFocus(false)}
+						onFocus={() => setExpenseNameFocus(true)}
+						onBlur={() => setExpenseNameFocus(false)}
 					/>
 					<input
 						name="expensePercentage"
@@ -319,6 +330,45 @@ export const BudgetSubmitter = () => {
 						value="Submit"
 						onSubmit={(e) => handleSubmitExpense(e)}
 					/>
+					<p
+						id="expenseNameNote"
+						className={
+							expenseNameFocus ? "instructions" : "offscreen"
+						}
+					>
+						<FaIcons.FaInfoCircle />
+						Enter a name for this expense, <br />
+						Must not be blank <br />
+					</p>
+					<p
+						id="expensePercentageNote"
+						className={
+							expensePercentageFocus && !expensePercentage
+								? "instructions"
+								: "offscreen"
+						}
+					>
+						<FaIcons.FaInfoCircle />
+						Enter how much of your monthly income you want to commit to this
+						expense, <br />
+						Must be a value between 1-99%, not required if you wish to only
+						enter a flat $ cost.
+						<br />
+					</p>
+					<p
+						id="expenseCostNote"
+						className={
+							expenseFlatCostFocus && !expenseFlatCost
+								? "instructions"
+								: "offscreen"
+						}
+					>
+						<FaIcons.FaInfoCircle />
+						Enter how much of your months income you want to commit to this
+						expense, <br />
+						Must be a value rounded to the nearest whole dollar, not required if
+						you wish to only enter a percentage of monthly income. <br />
+					</p>
 				</form>
 				<form onSubmit={(e) => handleSubmitSavingAmount(e)}>
 					<h3>How much would you like to save from each paycheck?</h3>
@@ -335,7 +385,7 @@ export const BudgetSubmitter = () => {
 						onFocus={() => setTotalSavingAmountFocus(true)}
 						onBlur={() => setTotalSavingAmountFocus(false)}
 					/>
-					<p> or </p>
+					<label> or </label>
 					<input
 						name="totalSavingPercent"
 						type="number"
@@ -362,6 +412,30 @@ export const BudgetSubmitter = () => {
 						value="Submit"
 						onSubmit={(e) => handleSubmitIncome(e)}
 					/>
+					<p
+						id="totalSavingAmountNote"
+						className={
+							totalSavingAmountFocus && !totalSavingAmount ? "instructions" : "offscreen"
+						}
+					>
+						<FaIcons.FaInfoCircle />
+						Enter how much of your income you wish to allocate to
+						savings/investments each month, <br />
+						Must be a value rounded to the nearest whole dollar, not required if
+						you wish to only enter a percentage of monthly income. <br />
+					</p>
+					<p
+						id="totalSavingPercentNote"
+						className={
+							totalSavingPercentFocus && !totalSavingPercent ? "instructions" : "offscreen"
+						}
+					>
+						<FaIcons.FaInfoCircle />
+						Enter what percentage you wish to allocate to savings/investments
+						each month, <br />
+						Must be a value between 1-99%, not required if you wish to only
+						enter an dollar amount. <br />
+					</p>
 				</form>
 				<form onSubmit={(e) => handleSubmitSaving(e)}>
 					<h3>Enter a saving/investment</h3>
@@ -375,8 +449,8 @@ export const BudgetSubmitter = () => {
 						value={savingName}
 						onChange={(e) => setSavingName(e.target.value)}
 						required
-						onFocus={() => setSavingFocus(true)}
-						onBlur={() => setSavingFocus(false)}
+						onFocus={() => setSavingNameFocus(true)}
+						onBlur={() => setSavingNameFocus(false)}
 					/>
 					<input
 						name="savingPercentage"
@@ -418,6 +492,45 @@ export const BudgetSubmitter = () => {
 						value="Submit"
 						onSubmit={(e) => handleSubmitSaving(e)}
 					/>
+					<p
+						id="savingPercentageNote"
+						className={
+							savingPercentageFocus && !savingPercentage
+								? "instructions"
+								: "offscreen"
+						}
+					>
+						<FaIcons.FaInfoCircle />
+						Enter how much of your monthly saving allocation you want to commit
+						to this saving/investment, <br />
+						Must be a value between 1-99%, not required if you wish to only
+						enter a flat $ amount.
+						<br />
+					</p>
+					<p
+						id="savingCostNote"
+						className={
+							savingFlatCostFocus && !savingFlatCost
+								? "instructions"
+								: "offscreen"
+						}
+					>
+						<FaIcons.FaInfoCircle />
+						Enter how much of your monthy saving allocation you want to commit
+						to this saving, <br />
+						Must be a value rounded to the nearest whole dollar, not required if
+						you wish to only enter a percentage of monthly savings. <br />
+					</p>
+					<p
+						id="savingNameNote"
+						className={
+							savingNameFocus ? "instructions" : "offscreen"
+						}
+					>
+						<FaIcons.FaInfoCircle />
+						Enter a name for this saving/investment type, <br />
+						Must not be blank <br />
+					</p>
 				</form>
 			</div>
 		</>

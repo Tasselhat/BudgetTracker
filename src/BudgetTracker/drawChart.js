@@ -68,7 +68,7 @@ const drawChart = (element, data) => {
 
 	const pieGenerator = d3
 		.pie()
-		.startAngle(-1.5 * Math.PI)
+		.startAngle(-0.5 * Math.PI)
 		.value((d) => d.value);
 
 	const arcs = svg.selectAll().data(pieGenerator(data)).enter();
@@ -103,7 +103,7 @@ const drawChart = (element, data) => {
 		.attr("text-anchor", "middle")
 		.text(
 			(d) =>
-				`$${d.data.value} ${d.data.label
+				`$${d.data.value} - ${d.data.label
 					.charAt(0)
 					.toUpperCase()}${d.data.label.slice(1)}`
 		) //label text
