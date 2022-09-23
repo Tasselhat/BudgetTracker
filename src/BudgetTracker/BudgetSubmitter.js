@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../css/TrackerRings.css";
 import * as FaIcons from "react-icons/fa";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import GetExpensesList from "./GetExpensesList";
 
 const SAVINGS_URL = "/savings";
 const EXPENSE_URL = "/expenses";
@@ -42,6 +43,7 @@ export const BudgetSubmitter = () => {
 	const location = useLocation();
 
 	const [errMsg, setErrMsg] = useState("");
+	const [updatedKey, setUpdatedKey] = useState(0);
 
 	useEffect(() => {
 		incomeRef.current.focus();
@@ -89,6 +91,7 @@ export const BudgetSubmitter = () => {
 			setExpenseName("Example: Rent");
 			setExpensePercentage(0);
 			setExpenseFlatCost(0);
+			setUpdatedKey(1+updatedKey);
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg("No response from the server");
@@ -134,6 +137,7 @@ export const BudgetSubmitter = () => {
 			setExpenseName("Example: Retirement (401k)");
 			setExpensePercentage(0);
 			setExpenseFlatCost(0);
+			setUpdatedKey(1+updatedKey);
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg("No response from the server");
@@ -171,6 +175,7 @@ export const BudgetSubmitter = () => {
 			alert("Income was submitted: $" + income);
 			// clear input fields to stop multiple put requests
 			setIncome(0);
+			setUpdatedKey(1+updatedKey);
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg("No response from the server");
@@ -222,6 +227,7 @@ export const BudgetSubmitter = () => {
 			// clear input fields to stop multiple put requests
 			setTotalSavingAmount(0);
 			setTotalSavingPercent(0);
+			setUpdatedKey(1+updatedKey);
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg("No response from the server");
@@ -241,6 +247,7 @@ export const BudgetSubmitter = () => {
 
 	return (
 		<>
+			<GetExpensesList key={updatedKey} />
 			<div>
 				<p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
 					{errMsg}
@@ -254,6 +261,7 @@ export const BudgetSubmitter = () => {
 						min="0"
 						max="1000000000"
 						id="income"
+						aria-describedby="incomeNote"
 						autoComplete="off"
 						ref={incomeRef}
 						value={income}
@@ -285,6 +293,7 @@ export const BudgetSubmitter = () => {
 						id="expenseName"
 						name="expenseName"
 						autoComplete="off"
+						aria-describedby="expenseNameNote"
 						value={expenseName}
 						onChange={(e) => setExpenseName(e.target.value)}
 						required
@@ -297,6 +306,7 @@ export const BudgetSubmitter = () => {
 						min="0"
 						max="100"
 						id="expensePercentage"
+						aria-describedby="expensePercentageNote"
 						autoComplete="off"
 						value={expensePercentage}
 						onChange={(e) => setExpensePercentage(e.target.value)}
@@ -311,6 +321,7 @@ export const BudgetSubmitter = () => {
 						min="0"
 						max="1000000"
 						id="expenseFlatCost"
+						aria-describedby="expenseCostNote"
 						autoComplete="off"
 						value={expenseFlatCost}
 						onChange={(e) => setExpenseFlatCost(e.target.value)}
@@ -332,9 +343,7 @@ export const BudgetSubmitter = () => {
 					/>
 					<p
 						id="expenseNameNote"
-						className={
-							expenseNameFocus ? "instructions" : "offscreen"
-						}
+						className={expenseNameFocus ? "instructions" : "offscreen"}
 					>
 						<FaIcons.FaInfoCircle />
 						Enter a name for this expense, <br />
@@ -379,6 +388,7 @@ export const BudgetSubmitter = () => {
 						min="0"
 						id="totalSavingAmount"
 						autoComplete="off"
+						aria-describedby="totalSavingAmountNote"
 						value={totalSavingAmount}
 						onChange={(e) => setTotalSavingAmount(e.target.value)}
 						required
@@ -393,6 +403,7 @@ export const BudgetSubmitter = () => {
 						max="100"
 						id="totalSavingPercent"
 						autoComplete="off"
+						aria-describedby="totalSavingPercentNote"
 						value={totalSavingPercent}
 						onChange={(e) => setTotalSavingPercent(e.target.value)}
 						required
@@ -415,7 +426,9 @@ export const BudgetSubmitter = () => {
 					<p
 						id="totalSavingAmountNote"
 						className={
-							totalSavingAmountFocus && !totalSavingAmount ? "instructions" : "offscreen"
+							totalSavingAmountFocus && !totalSavingAmount
+								? "instructions"
+								: "offscreen"
 						}
 					>
 						<FaIcons.FaInfoCircle />
@@ -427,7 +440,9 @@ export const BudgetSubmitter = () => {
 					<p
 						id="totalSavingPercentNote"
 						className={
-							totalSavingPercentFocus && !totalSavingPercent ? "instructions" : "offscreen"
+							totalSavingPercentFocus && !totalSavingPercent
+								? "instructions"
+								: "offscreen"
 						}
 					>
 						<FaIcons.FaInfoCircle />
@@ -446,6 +461,7 @@ export const BudgetSubmitter = () => {
 						id="savingName"
 						ref={savingRef}
 						autoComplete="off"
+						aria-describedby="savingNameNote"
 						value={savingName}
 						onChange={(e) => setSavingName(e.target.value)}
 						required
@@ -458,6 +474,7 @@ export const BudgetSubmitter = () => {
 						min="0"
 						max="100"
 						id="savingPercentage"
+						aria-describedby="savingPercentageNote"
 						autoComplete="off"
 						value={savingPercentage}
 						onChange={(e) => setSavingPercentage(e.target.value)}
@@ -474,6 +491,7 @@ export const BudgetSubmitter = () => {
 						max="1000000000"
 						id="savingFlatCost"
 						autoComplete="off"
+						aria-describedby="savingCostNote"
 						value={savingFlatCost}
 						onChange={(e) => setSavingFlatCost(e.target.value)}
 						onFocus={() => setSavingFlatCostFocus(true)}
@@ -523,9 +541,7 @@ export const BudgetSubmitter = () => {
 					</p>
 					<p
 						id="savingNameNote"
-						className={
-							savingNameFocus ? "instructions" : "offscreen"
-						}
+						className={savingNameFocus ? "instructions" : "offscreen"}
 					>
 						<FaIcons.FaInfoCircle />
 						Enter a name for this saving/investment type, <br />

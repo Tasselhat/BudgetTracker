@@ -8,12 +8,9 @@ export default class TrackerRings extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {};
+		this.state = {
+		};
 	}
-
-	handleClick = () => {
-		this.forceUpdate();
-	};
 
 	render() {
 		return (
