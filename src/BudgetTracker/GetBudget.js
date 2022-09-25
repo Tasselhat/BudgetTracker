@@ -14,8 +14,9 @@ const data = [
 	{ label: "Extra Income", value: 234 },
 ];
 
-const GetBudget = () => {
+const GetBudget = (updatedKey) => {
 	const [budget, setBudget] = useState();
+	const [key, setKey] = useState(updatedKey);
 	const [chartData, setChartData] = useState();
 	const [arrayExists, setArrayExists] = useState(false);
 	const [expensesExceedIncomeWarning, setExpensesExceedIncomeWarning] =

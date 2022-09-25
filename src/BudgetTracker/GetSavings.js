@@ -11,8 +11,9 @@ const savingsData = [
 	{ label: "Extra Savings", value: 12 },
 ];
 
-const GetSavings = () => {
+const GetSavings = (updatedKey) => {
 	const [savings, setSavings] = useState();
+	const [key, setKey] = useState(updatedKey);
 	const [chartData, setChartData] = useState();
 	const [arrayExists, setArrayExists] = useState(false);
 	const [noSavingWarning, setNoSavingWarning] = useState("");

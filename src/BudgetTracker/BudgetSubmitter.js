@@ -63,6 +63,8 @@ export const BudgetSubmitter = () => {
 		totalSavingPercent,
 	]);
 
+	const handleFocus = (event) => event.target.select();
+
 	const handleSubmitExpense = async (e) => {
 		e.preventDefault(e);
 		if (
@@ -265,6 +267,7 @@ export const BudgetSubmitter = () => {
 						autoComplete="off"
 						ref={incomeRef}
 						value={income}
+						onClick={(e) => handleFocus(e)}
 						onChange={(e) => setIncome(e.target.value)}
 						required
 						onFocus={() => setIncomeFocus(true)}
@@ -294,7 +297,8 @@ export const BudgetSubmitter = () => {
 						name="expenseName"
 						autoComplete="off"
 						aria-describedby="expenseNameNote"
-						value={expenseName}
+						value={expenseName}						
+						onClick={(e) => handleFocus(e)}
 						onChange={(e) => setExpenseName(e.target.value)}
 						required
 						onFocus={() => setExpenseNameFocus(true)}
@@ -309,6 +313,7 @@ export const BudgetSubmitter = () => {
 						aria-describedby="expensePercentageNote"
 						autoComplete="off"
 						value={expensePercentage}
+						onClick={(e) => handleFocus(e)}
 						onChange={(e) => setExpensePercentage(e.target.value)}
 						onFocus={() => setExpensePercentageFocus(true)}
 						onBlur={() => setExpensePercentageFocus(false)}
@@ -323,6 +328,7 @@ export const BudgetSubmitter = () => {
 						id="expenseFlatCost"
 						aria-describedby="expenseCostNote"
 						autoComplete="off"
+						onClick={(e) => handleFocus(e)}
 						value={expenseFlatCost}
 						onChange={(e) => setExpenseFlatCost(e.target.value)}
 						onFocus={() => setExpenseFlatCostFocus(true)}
@@ -390,6 +396,7 @@ export const BudgetSubmitter = () => {
 						autoComplete="off"
 						aria-describedby="totalSavingAmountNote"
 						value={totalSavingAmount}
+						onClick={(e) => handleFocus(e)}
 						onChange={(e) => setTotalSavingAmount(e.target.value)}
 						required
 						onFocus={() => setTotalSavingAmountFocus(true)}
@@ -405,6 +412,7 @@ export const BudgetSubmitter = () => {
 						autoComplete="off"
 						aria-describedby="totalSavingPercentNote"
 						value={totalSavingPercent}
+						onClick={(e) => handleFocus(e)}
 						onChange={(e) => setTotalSavingPercent(e.target.value)}
 						required
 						onFocus={() => setTotalSavingPercentFocus(true)}
@@ -421,6 +429,7 @@ export const BudgetSubmitter = () => {
 						}
 						type="submit"
 						value="Submit"
+						onClick={(e) => handleFocus(e)}
 						onSubmit={(e) => handleSubmitIncome(e)}
 					/>
 					<p
@@ -463,6 +472,7 @@ export const BudgetSubmitter = () => {
 						autoComplete="off"
 						aria-describedby="savingNameNote"
 						value={savingName}
+						onClick={(e) => handleFocus(e)}
 						onChange={(e) => setSavingName(e.target.value)}
 						required
 						onFocus={() => setSavingNameFocus(true)}
@@ -477,6 +487,7 @@ export const BudgetSubmitter = () => {
 						aria-describedby="savingPercentageNote"
 						autoComplete="off"
 						value={savingPercentage}
+						onClick={(e) => handleFocus(e)}
 						onChange={(e) => setSavingPercentage(e.target.value)}
 						required
 						onFocus={() => setSavingPercentageFocus(true)}
@@ -493,6 +504,7 @@ export const BudgetSubmitter = () => {
 						autoComplete="off"
 						aria-describedby="savingCostNote"
 						value={savingFlatCost}
+						onClick={(e) => handleFocus(e)}
 						onChange={(e) => setSavingFlatCost(e.target.value)}
 						onFocus={() => setSavingFlatCostFocus(true)}
 						onBlur={() => setSavingFlatCostFocus(false)}
