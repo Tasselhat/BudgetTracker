@@ -24,13 +24,15 @@ export default class TrackerRings extends React.Component {
 
 	render() {
 		return (
-			<div className="tracker-rings-container">
-				<div className="chart-container">
-					<GetBudget key={this.state.updatedKey0} />
-					<GetSavings key={this.state.updatedKey1} />
+			<section>
+				<div className="tracker-rings-container">
+					<div className="chart-container">
+						<GetBudget key={this.state.updatedKey0} />
+						<GetSavings key={this.state.updatedKey1} />
+					</div>
 				</div>
 				<button onClick={(e) => this.handleClick(e)}>Update Rings</button>
-			</div>
+			</section>
 		);
 	}
 }

@@ -248,9 +248,9 @@ export const BudgetSubmitter = () => {
 	};
 
 	return (
-		<>
+		<div className="budget-submitter-wrapper">
 			<GetExpensesList key={updatedKey} />
-			<div>
+			<div className="budget-submission-form">
 				<p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
 					{errMsg}
 				</p>
@@ -273,6 +273,7 @@ export const BudgetSubmitter = () => {
 						onFocus={() => setIncomeFocus(true)}
 						onBlur={() => setIncomeFocus(false)}
 					/>
+					&nbsp;
 					<input
 						disabled={!income || income == 0 ? true : false}
 						type="submit"
@@ -304,6 +305,7 @@ export const BudgetSubmitter = () => {
 						onFocus={() => setExpenseNameFocus(true)}
 						onBlur={() => setExpenseNameFocus(false)}
 					/>
+					&nbsp;
 					<input
 						name="expensePercentage"
 						type="number"
@@ -334,6 +336,7 @@ export const BudgetSubmitter = () => {
 						onFocus={() => setExpenseFlatCostFocus(true)}
 						onBlur={() => setExpenseFlatCostFocus(false)}
 					/>
+					&nbsp;
 					<input
 						disabled={
 							!expenseName ||
@@ -418,7 +421,8 @@ export const BudgetSubmitter = () => {
 						onFocus={() => setTotalSavingPercentFocus(true)}
 						onBlur={() => setTotalSavingPercentFocus(false)}
 					/>
-					<label htmlFor="totalSaving Percent">% of each paycheck.</label>
+					<label htmlFor="totalSavingPercent">% of each paycheck.</label>
+					&nbsp;
 					<input
 						disabled={
 							(totalSavingPercent == 0 && totalSavingAmount == 0) ||
@@ -478,6 +482,7 @@ export const BudgetSubmitter = () => {
 						onFocus={() => setSavingNameFocus(true)}
 						onBlur={() => setSavingNameFocus(false)}
 					/>
+					&nbsp;
 					<input
 						name="savingPercentage"
 						type="number"
@@ -489,7 +494,6 @@ export const BudgetSubmitter = () => {
 						value={savingPercentage}
 						onClick={(e) => handleFocus(e)}
 						onChange={(e) => setSavingPercentage(e.target.value)}
-						required
 						onFocus={() => setSavingPercentageFocus(true)}
 						onBlur={() => setSavingPercentageFocus(false)}
 					/>
@@ -509,6 +513,7 @@ export const BudgetSubmitter = () => {
 						onFocus={() => setSavingFlatCostFocus(true)}
 						onBlur={() => setSavingFlatCostFocus(false)}
 					/>
+					&nbsp;
 					<input
 						disabled={
 							!savingName ||
@@ -561,6 +566,6 @@ export const BudgetSubmitter = () => {
 					</p>
 				</form>
 			</div>
-		</>
+		</div>
 	);
 };
