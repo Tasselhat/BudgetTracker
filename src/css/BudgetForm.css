@@ -1,0 +1,59 @@
+.budget-submitter-wrapper {
+	background: no-repeat
+		url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+	min-height: calc(100vh - 80px);
+	padding: 1rem 0.5rem;
+	color: rgb(170, 176, 182);
+}
+
+.expense-list-wrapper {
+  background-color: #0a0a29;
+	text-shadow: 1px 2px 3px #040404;
+	padding: 1rem;
+  margin: 30px;
+	border-radius: 6px;
+}
+
+.budget-submission-form {
+  min-width: 50vw;
+  margin: 30px;
+  justify-content: space-around;
+  background-color: #0a0a29;
+  padding: 1rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.budget-submission-form input {
+	background-color: transparent;
+	color: rgb(144, 151, 158);
+	height: 1.35rem;
+	border-radius: 6px;
+	border-color: white;
+}
+
+.budget-submission-form input:disabled {
+	opacity: 0.4;
+	border-width: 1px;
+}
+
+
+.budget-submission-form form {
+	margin: 10px;
+}
+
+.expense-list ::marker {
+	color: transparent;
+}
+
+@media (max-width: 1200px) {
+  .budget-submitter-wrapper {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}

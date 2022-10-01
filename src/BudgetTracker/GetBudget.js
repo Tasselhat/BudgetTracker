@@ -146,22 +146,20 @@ const GetBudget = (updatedKey) => {
 	if (arrayExists) {
 		return (
 			<section>
-				<>
-					<h2>Breakdown of expenses:</h2>
-					<ChartComponent data={chartData} />
-					<p
-						className={noIncomeWarning ? "errmsg" : "offscreen"}
-						aria-live="assertive"
-					>
-						{noIncomeWarning}
-					</p>
-					<p
-						className={expensesExceedIncomeWarning ? "errmsg" : "offscreen"}
-						aria-live="assertive"
-					>
-						{expensesExceedIncomeWarning}
-					</p>
-				</>
+				<h2>Breakdown of expenses:</h2>
+				<ChartComponent data={chartData} />
+				<p
+					className={noIncomeWarning ? "errmsg" : "offscreen"}
+					aria-live="assertive"
+				>
+					{noIncomeWarning}
+				</p>
+				<p
+					className={expensesExceedIncomeWarning ? "errmsg" : "offscreen"}
+					aria-live="assertive"
+				>
+					{expensesExceedIncomeWarning}
+				</p>
 			</section>
 		);
 	} else {

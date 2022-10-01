@@ -1,7 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import * as FaIcons from "react-icons/fa";
 import "../css/TrackerRings.css";
+
+const EXPENSE_URL = "/expenses";
+
+const controller = new AbortController();
 
 const GetExpensesList = (updatedKey) => {
 	const [budget, setBudget] = useState();
@@ -35,6 +40,33 @@ const GetExpensesList = (updatedKey) => {
 		};
 	}, [axiosPrivate]);
 
+	const handleDeleteExpense = async (e) => {
+		e.preventDefault(e);
+		const id = await e.target.value;
+		console.log(id)
+		try {
+			const response = await axiosPrivate.delete(
+				EXPENSE_URL,
+				JSON.stringify({ id }),
+				{
+					headers: { "Content-Type": "application/json" },
+					withCredentials: true,
+					signal: controller.signal,
+				}
+			);
+			console.log(response.data);
+			alert("An expense was deleted");
+		} catch (err) {
+			if (!err?.response) {
+				console.error(err);
+				//navigate("/login", { state: { from: location }, replace: true });
+			} else {
+				console.error(err);
+				navigate("/login", { state: { from: location }, replace: true });
+			}
+		}
+	};
+
 	return (
 		<div className="expense-list-wrapper">
 			<article className="expense-list">
@@ -66,6 +98,7 @@ const GetExpensesList = (updatedKey) => {
 							<li key={i}>
 								{expenses?.expenseName} {expenses?.expensePercentage}% of income
 								or ${expenses?.expenseFlatCost}
+								<button value={expenses._id} onClick={(e) => handleDeleteExpense(e)}><FaIcons.FaTrash></FaIcons.FaTrash></button>
 							</li>
 						))}
 						<br />
@@ -80,6 +113,7 @@ const GetExpensesList = (updatedKey) => {
 							<li key={i}>
 								{savings?.savingName} {savings?.savingPercentage}% of income or
 								${savings?.savingFlatCost}
+								<button value={savings._id}><FaIcons.FaTrash></FaIcons.FaTrash></button>
 							</li>
 						))}
 						<br />

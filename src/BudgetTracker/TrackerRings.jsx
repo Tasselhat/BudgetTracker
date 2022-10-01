@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../css/TrackerRings.css";
 import GetBudget from "./GetBudget";
 import GetSavings from "./GetSavings";
@@ -30,8 +31,13 @@ export default class TrackerRings extends React.Component {
 						<GetBudget key={this.state.updatedKey0} />
 						<GetSavings key={this.state.updatedKey1} />
 					</div>
+					<button className="updateButton" onClick={(e) => this.handleClick(e)}>
+						Update Rings
+					</button>
+					<Link to="/">
+						<button className="changeButton">Change Budget</button>
+					</Link>
 				</div>
-				<button onClick={(e) => this.handleClick(e)}>Update Rings</button>
 			</section>
 		);
 	}

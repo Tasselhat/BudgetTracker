@@ -1,74 +1,113 @@
+h2 {
+	margin: 0.5vh 0 0.5vh 0;
+}
+
 .tracker-rings-container {
-	background: no-repeat
-		url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
+	background-color: #666666;
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	min-height: calc(100vh - 80px);
-	padding: 1rem 0.5rem;
+	padding: 0rem 0.5rem;
+}
+
+.updateButton {
+	position: absolute;
+	top: 15vh;
+	left: 70vw;
+
+	font-weight: 500;
+	font-style: normal;
+	font-size: calc(0.05 * 1vw + 1rem);
+	letter-spacing: 0em;
+	text-transform: none;
+	line-height: 1.6em;
+	border-color: #040404;
+	color: #040404;
+	border-style: solid;
+	cursor: pointer;
+	border-width: 1px;
+	border-radius: 6px;
+	padding: 0.3vw 0.4vw 0.3vw 0.4vw;
+	margin-right: 0.2vw;
+	margin-left: 0.2vw;
+	margin-top: 0.2vw;
+	margin-bottom: 0.2vw;
+	transition: background-color 200ms, color 60ms, padding 200ms, margin 200ms;
+}
+
+.updateButton:hover {
+	color: #040404;
+	padding-left: 0.6vw;
+	padding-right: 0.6vw;
+	padding-top: 0.5vw;
+	padding-bottom: 0.5vw;
+	opacity: 0.9;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
+}
+
+.updateButton:active {
+	opacity: 0.6;
+}
+
+.changeButton {
+	position: absolute;
+	top: 60vh;
+	left: 70vw;
+
+	font-weight: 500;
+	font-style: normal;
+	font-size: calc(0.05 * 1vw + 1rem);
+	letter-spacing: 0em;
+	text-transform: none;
+	line-height: 1.6em;
+	border-color: #040404;
+	color: #040404;
+	border-style: solid;
+	cursor: pointer;
+	border-width: 1px;
+	border-radius: 6px;
+	padding: 0.3vw 0.4vw 0.3vw 0.4vw;
+	margin-right: 0.2vw;
+	margin-left: 0.2vw;
+	margin-top: 0.2vw;
+	margin-bottom: 0.2vw;
+	transition: background-color 200ms, color 60ms, padding 200ms, margin 200ms;
+}
+
+.changeButton:hover {
+	color: #040404;
+	padding-left: 0.6vw;
+	padding-right: 0.6vw;
+	padding-top: 0.5vw;
+	padding-bottom: 0.5vw;
+	opacity: 0.9;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
+}
+
+.changeButton:active {
+	opacity: 0.6;
 }
 
 .chart-container {
-	width: 50vw;
+	width: 75vw;
 }
 
 .container {
-	height: 45%;
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: space-around;
 }
 
 .graph {
-	height: 45vh;
+	height: 40vh;
 	width: 70vw;
-}
-
-.budget-submitter-wrapper {
-	background: no-repeat
-		url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	align-items: center;
-	min-height: calc(100vh - 80px);
-	padding: 1rem 0.5rem;
-    color: rgb(144, 151, 158);
-}
-
-.expense-list-wrapper {
-	background-color: #0a0a29;
-	text-shadow: 1px 2px 3px #040404;
-	padding: 1rem;
-	border-radius: 6px;
-}
-
-.budget-submission-form input {
-	background-color: transparent;
-	color: rgb(144, 151, 158);
-	height: 1.35rem;
-	border-radius: 6px;
-	border-color: white;
-}
-
-.budget-submission-form input:disabled  {
-	opacity: 0.4;
-	border-width: 1px;
-}
-
-
-.budget-submission-form {
-	width: 54vw;
-	height: 30vh;
-	justify-content: space-around;
-	background-color: #0a0a29;
-	padding: 1rem;
-	border-radius: 6px;
-	display: flex;
-	flex-direction: column;
-}
-
-.expense-list ::marker {
-	color: transparent;
 }

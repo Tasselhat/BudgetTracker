@@ -24,14 +24,14 @@ export const BudgetSubmitter = () => {
 	const [totalSavingPercent, setTotalSavingPercent] = useState(0);
 	const [totalSavingPercentFocus, setTotalSavingPercentFocus] = useState(false);
 
-	const [expenseName, setExpenseName] = useState("Example: Rent");
+	const [expenseName, setExpenseName] = useState("I.e. Rent");
 	const [expensePercentage, setExpensePercentage] = useState(0);
 	const [expenseFlatCost, setExpenseFlatCost] = useState(0);
 	const [expenseNameFocus, setExpenseNameFocus] = useState(false);
 	const [expensePercentageFocus, setExpensePercentageFocus] = useState(false);
 	const [expenseFlatCostFocus, setExpenseFlatCostFocus] = useState(false);
 
-	const [savingName, setSavingName] = useState("Example: Retirement (401k)");
+	const [savingName, setSavingName] = useState("I.e. Stocks");
 	const [savingPercentage, setSavingPercentage] = useState(0);
 	const [savingFlatCost, setSavingFlatCost] = useState(0);
 	const [savingNameFocus, setSavingNameFocus] = useState(false);
@@ -90,7 +90,7 @@ export const BudgetSubmitter = () => {
 			console.log(response.data);
 			alert("An expense was submitted: " + expenseName);
 			// reset input fields to stop multiple put requests
-			setExpenseName("Example: Rent");
+			setExpenseName("I.e. Rent");
 			setExpensePercentage(0);
 			setExpenseFlatCost(0);
 			setUpdatedKey(1+updatedKey);
@@ -136,7 +136,7 @@ export const BudgetSubmitter = () => {
 			console.log(response.data);
 			alert("A saving/investment type was submitted: " + savingName);
 			// clear input fields to stop multiple put requests
-			setExpenseName("Example: Retirement (401k)");
+			setExpenseName("I.e. Stocks");
 			setExpensePercentage(0);
 			setExpenseFlatCost(0);
 			setUpdatedKey(1+updatedKey);

@@ -119,24 +119,22 @@ consider adjusting savings/investments amounts, increasing monthly income, or ad
 
 	if (arrayExists) {
 		return (
-			<section>
-				<>
-					<h2>Breakdown of Savings/Investments:</h2>
-					<ChartComponent data={chartData} />
-					<p
-						className={noSavingWarning ? "errmsg" : "offscreen"}
-						aria-live="assertive"
-					>
-						{noSavingWarning}
-					</p>
-					<p
-						className={savingsExceedtotalWarning ? "errmsg" : "offscreen"}
-						aria-live="assertive"
-					>
-						{savingsExceedtotalWarning}
-					</p>
-				</>
-			</section>
+			<div>
+				<h2>Breakdown of Savings/Investments:</h2>
+				<ChartComponent data={chartData} />
+				<p
+					className={noSavingWarning ? "errmsg" : "offscreen"}
+					aria-live="assertive"
+				>
+					{noSavingWarning}
+				</p>
+				<p
+					className={savingsExceedtotalWarning ? "errmsg" : "offscreen"}
+					aria-live="assertive"
+				>
+					{savingsExceedtotalWarning}
+				</p>
+			</div>
 		);
 	} else {
 		return (
