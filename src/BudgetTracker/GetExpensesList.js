@@ -41,7 +41,7 @@ const GetExpensesList = (updatedKey) => {
 	}, [axiosPrivate]);
 
 	const handleDeleteExpense = async (e) => {
-		e.preventDefault(e);
+		e.preventDefault();
 		const id = await e.target.value;
 		console.log(id)
 		try {
