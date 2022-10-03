@@ -5,10 +5,11 @@ import * as FaIcons from "react-icons/fa";
 import "../css/TrackerRings.css";
 
 const EXPENSE_URL = "/expenses";
+const BUDGET_URL = "/budgets";
 
 const controller = new AbortController();
 
-const GetExpensesList = (updatedKey) => {
+const GetFullBudget = (updatedKey) => {
 	const [budget, setBudget] = useState();
 	const [name, setName] = useState("");
 
@@ -44,7 +45,6 @@ const GetExpensesList = (updatedKey) => {
 		};
 	}, [axiosPrivate]);
 
-
 	const handleClick = (e) => {
 		e.preventDefault();
 		setName(e.target.value);
@@ -66,7 +66,7 @@ const GetExpensesList = (updatedKey) => {
 				);
 				console.log(response.data);
 				alert("An expense was deleted " + name);
-				setName("")
+				setName("");
 			} catch (err) {
 				if (!err?.response) {
 					console.error(err);
@@ -78,8 +78,28 @@ const GetExpensesList = (updatedKey) => {
 			}
 		};
 		handleDeleteExpense();
-	} 
+	};
 
+	const handleDelete = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await axiosPrivate.delete(BUDGET_URL, {
+				headers: { "Content-Type": "application/json" },
+				withCredentials: true,
+				signal: controller.signal,
+			});
+			console.log(response.data);
+			alert("User Budget Reset.");
+		} catch (err) {
+			if (!err?.response) {
+				console.error(err);
+				//navigate("/login", { state: { from: location }, replace: true });
+			} else {
+				console.error(err);
+				navigate("/login", { state: { from: location }, replace: true });
+			}
+		}
+	};
 
 	return (
 		<div className="expense-list-wrapper">
@@ -140,11 +160,15 @@ const GetExpensesList = (updatedKey) => {
 						<br />
 					</ul>
 				) : (
+					<div>
 					<h2>No Expenses found</h2>
+					<br />
+					</div>
 				)}
+				<button onClick={(e) => handleDelete(e)}>Reset Budget</button>
 			</article>
 		</div>
 	);
 };
 
-export default GetExpensesList;
+export default GetFullBudget;

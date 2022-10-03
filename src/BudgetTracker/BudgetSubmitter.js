@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../css/TrackerRings.css";
 import * as FaIcons from "react-icons/fa";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import GetExpensesList from "./GetExpensesList";
+import GetFullBudget from "./GetFullBudget";
 
 const SAVINGS_URL = "/savings";
 const EXPENSE_URL = "/expenses";
@@ -37,7 +37,7 @@ export const BudgetSubmitter = () => {
 	const [savingNameFocus, setSavingNameFocus] = useState(false);
 	const [savingPercentageFocus, setSavingPercentageFocus] = useState(false);
 	const [savingFlatCostFocus, setSavingFlatCostFocus] = useState(false);
-	
+
 	const axiosPrivate = useAxiosPrivate();
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -62,9 +62,9 @@ export const BudgetSubmitter = () => {
 		totalSavingAmount,
 		totalSavingPercent,
 	]);
-	
+
 	const handleFocus = (event) => event.target.select();
-	
+
 	const handleSubmitIncome = async (e) => {
 		e.preventDefault(e);
 		if (!income || income == 0) {
@@ -85,7 +85,7 @@ export const BudgetSubmitter = () => {
 			alert("Income was submitted: $" + income);
 			// clear input fields to stop multiple put requests
 			setIncome(0);
-			setUpdatedKey(1+updatedKey);
+			setUpdatedKey(1 + updatedKey);
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg("No response from the server");
@@ -102,7 +102,7 @@ export const BudgetSubmitter = () => {
 			errRef.current.focus();
 		}
 	};
-	
+
 	const handleSubmitExpense = async (e) => {
 		e.preventDefault(e);
 		if (
@@ -131,7 +131,7 @@ export const BudgetSubmitter = () => {
 			setExpenseName("I.e. Rent");
 			setExpensePercentage(0);
 			setExpenseFlatCost(0);
-			setUpdatedKey(1+updatedKey);
+			setUpdatedKey(1 + updatedKey);
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg("No response from the server");
@@ -174,10 +174,10 @@ export const BudgetSubmitter = () => {
 			console.log(response.data);
 			alert("A saving/investment type was submitted: " + savingName);
 			// clear input fields to stop multiple put requests
-			setExpenseName("I.e. Stocks");
-			setExpensePercentage(0);
-			setExpenseFlatCost(0);
-			setUpdatedKey(1+updatedKey);
+			setSavingName("I.e. Stocks");
+			setSavingPercentage(0);
+			setSavingFlatCost(0);
+			setUpdatedKey(1 + updatedKey);
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg("No response from the server");
@@ -194,7 +194,6 @@ export const BudgetSubmitter = () => {
 			errRef.current.focus();
 		}
 	};
-
 
 	const handleSubmitSavingAmount = async (e) => {
 		e.preventDefault(e);
@@ -230,7 +229,7 @@ export const BudgetSubmitter = () => {
 			// clear input fields to stop multiple put requests
 			setTotalSavingAmount(0);
 			setTotalSavingPercent(0);
-			setUpdatedKey(1+updatedKey);
+			setUpdatedKey(1 + updatedKey);
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg("No response from the server");
@@ -250,7 +249,7 @@ export const BudgetSubmitter = () => {
 
 	return (
 		<div className="budget-submitter-wrapper">
-			<GetExpensesList key={updatedKey} />
+			<GetFullBudget key={updatedKey} />
 			<div className="budget-submission-form">
 				<p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
 					{errMsg}
@@ -299,7 +298,7 @@ export const BudgetSubmitter = () => {
 						name="expenseName"
 						autoComplete="off"
 						aria-describedby="expenseNameNote"
-						value={expenseName}						
+						value={expenseName}
 						onClick={(e) => handleFocus(e)}
 						onChange={(e) => setExpenseName(e.target.value)}
 						required
