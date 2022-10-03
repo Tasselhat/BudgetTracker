@@ -10,7 +10,11 @@ const controller = new AbortController();
 
 const GetExpensesList = (updatedKey) => {
 	const [budget, setBudget] = useState();
+	const [name, setName] = useState("");
+
+	const [errMsg, setErrMsg] = useState("");
 	const [key, setKey] = useState(updatedKey);
+
 	const axiosPrivate = useAxiosPrivate();
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -40,45 +44,55 @@ const GetExpensesList = (updatedKey) => {
 		};
 	}, [axiosPrivate]);
 
-	const handleDeleteExpense = async (e) => {
+
+	const handleClick = (e) => {
 		e.preventDefault();
-		const id = await e.target.value;
-		console.log(id)
-		try {
-			const response = await axiosPrivate.delete(
-				EXPENSE_URL,
-				JSON.stringify({ id }),
-				{
-					headers: { "Content-Type": "application/json" },
-					withCredentials: true,
-					signal: controller.signal,
-				}
-			);
-			console.log(response.data);
-			alert("An expense was deleted");
-		} catch (err) {
-			if (!err?.response) {
-				console.error(err);
-				//navigate("/login", { state: { from: location }, replace: true });
-			} else {
-				console.error(err);
-				navigate("/login", { state: { from: location }, replace: true });
+		setName(e.target.value);
+		console.log(name);
+		const handleDeleteExpense = async () => {
+			if (!name) {
+				setErrMsg("Please include a value for your current income.");
+				return;
 			}
-		}
-	};
+			try {
+				const response = await axiosPrivate.delete(
+					EXPENSE_URL,
+					JSON.stringify({ name }),
+					{
+						headers: { "Content-Type": "application/json" },
+						withCredentials: true,
+						signal: controller.signal,
+					}
+				);
+				console.log(response.data);
+				alert("An expense was deleted " + name);
+				setName("")
+			} catch (err) {
+				if (!err?.response) {
+					console.error(err);
+					//navigate("/login", { state: { from: location }, replace: true });
+				} else {
+					console.error(err);
+					//navigate("/login", { state: { from: location }, replace: true });
+				}
+			}
+		};
+		handleDeleteExpense();
+	} 
+
 
 	return (
 		<div className="expense-list-wrapper">
 			<article className="expense-list">
 				<h2>Current Income:</h2>
-				{budget?.income ? (<p>${budget.income}</p>) : ( <p>No income found</p> )}
-				<br/>
+				{budget?.income ? <p>${budget.income}</p> : <p>No income found</p>}
+				<br />
 				<h2>Saving allocation:</h2>
 				{budget?.saving?.total ? ( //is there a total
 					budget?.saving?.percent ? ( //if there is a total is there a percent
 						<p>
-							${budget.saving.total} or {budget.saving.percent}% of income (whichever is
-							greater)
+							${budget.saving.total} or {budget.saving.percent}% of income
+							(whichever is greater)
 						</p>
 					) : (
 						//yes total no percent?
@@ -89,8 +103,8 @@ const GetExpensesList = (updatedKey) => {
 				) : (
 					//no total, no percent.
 					<p>No saving allocation</p>
-					)}
-				<br/>
+				)}
+				<br />
 				<h2>Expense List</h2>
 				{budget?.expenses?.length ? (
 					<ul>
@@ -98,7 +112,12 @@ const GetExpensesList = (updatedKey) => {
 							<li key={i}>
 								{expenses?.expenseName} {expenses?.expensePercentage}% of income
 								or ${expenses?.expenseFlatCost}
-								<button value={expenses._id} onClick={(e) => handleDeleteExpense(e)}><FaIcons.FaTrash></FaIcons.FaTrash></button>
+								<button
+									value={expenses.expenseName}
+									onClick={(e) => handleClick(e, "value")}
+								>
+									<FaIcons.FaTrash></FaIcons.FaTrash>
+								</button>
 							</li>
 						))}
 						<br />
@@ -113,7 +132,9 @@ const GetExpensesList = (updatedKey) => {
 							<li key={i}>
 								{savings?.savingName} {savings?.savingPercentage}% of income or
 								${savings?.savingFlatCost}
-								<button value={savings._id}><FaIcons.FaTrash></FaIcons.FaTrash></button>
+								<button value={savings._id}>
+									<FaIcons.FaTrash></FaIcons.FaTrash>
+								</button>
 							</li>
 						))}
 						<br />

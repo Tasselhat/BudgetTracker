@@ -37,7 +37,7 @@ export const BudgetSubmitter = () => {
 	const [savingNameFocus, setSavingNameFocus] = useState(false);
 	const [savingPercentageFocus, setSavingPercentageFocus] = useState(false);
 	const [savingFlatCostFocus, setSavingFlatCostFocus] = useState(false);
-
+	
 	const axiosPrivate = useAxiosPrivate();
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -62,9 +62,47 @@ export const BudgetSubmitter = () => {
 		totalSavingAmount,
 		totalSavingPercent,
 	]);
-
+	
 	const handleFocus = (event) => event.target.select();
-
+	
+	const handleSubmitIncome = async (e) => {
+		e.preventDefault(e);
+		if (!income || income == 0) {
+			setErrMsg("Please include a value for your current income.");
+			return;
+		}
+		try {
+			const response = await axiosPrivate.put(
+				BUDGET_URL,
+				JSON.stringify({ income }),
+				{
+					headers: { "Content-Type": "application/json" },
+					withCredentials: true,
+					signal: controller.signal,
+				}
+			);
+			console.log(response.data);
+			alert("Income was submitted: $" + income);
+			// clear input fields to stop multiple put requests
+			setIncome(0);
+			setUpdatedKey(1+updatedKey);
+		} catch (err) {
+			if (!err?.response) {
+				setErrMsg("No response from the server");
+				console.error(err);
+				navigate("/login", { state: { from: location }, replace: true });
+			} else if (err.response?.status === 400) {
+				setErrMsg("Income value is required.");
+				console.error(err);
+			} else {
+				setErrMsg("Submission Failed");
+				console.error(err);
+				navigate("/login", { state: { from: location }, replace: true });
+			}
+			errRef.current.focus();
+		}
+	};
+	
 	const handleSubmitExpense = async (e) => {
 		e.preventDefault(e);
 		if (
@@ -157,43 +195,6 @@ export const BudgetSubmitter = () => {
 		}
 	};
 
-	const handleSubmitIncome = async (e) => {
-		e.preventDefault(e);
-		if (!income || income == 0) {
-			setErrMsg("Please include a value for your current income.");
-			return;
-		}
-		try {
-			const response = await axiosPrivate.put(
-				BUDGET_URL,
-				JSON.stringify({ income }),
-				{
-					headers: { "Content-Type": "application/json" },
-					withCredentials: true,
-					signal: controller.signal,
-				}
-			);
-			console.log(response.data);
-			alert("Income was submitted: $" + income);
-			// clear input fields to stop multiple put requests
-			setIncome(0);
-			setUpdatedKey(1+updatedKey);
-		} catch (err) {
-			if (!err?.response) {
-				setErrMsg("No response from the server");
-				console.error(err);
-				navigate("/login", { state: { from: location }, replace: true });
-			} else if (err.response?.status === 400) {
-				setErrMsg("Income value is required.");
-				console.error(err);
-			} else {
-				setErrMsg("Submission Failed");
-				console.error(err);
-				navigate("/login", { state: { from: location }, replace: true });
-			}
-			errRef.current.focus();
-		}
-	};
 
 	const handleSubmitSavingAmount = async (e) => {
 		e.preventDefault(e);
