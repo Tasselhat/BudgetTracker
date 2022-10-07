@@ -5,6 +5,7 @@ import TrackerRings from "./BudgetTracker/TrackerRings.jsx";
 import RegistrationPage from "./Pages/RegistrationPage.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import AdminDashboard from "./Pages/Admin";
+import BudgetDashboard from "./Pages/BudgetDashboard";
 import Unauthorized from "./Pages/Unauthorized.jsx";
 import EditorDashboard from "./Pages/Editor.jsx";
 import Missing from "./Pages/Missing.jsx";
@@ -24,6 +25,7 @@ function App() {
 				<Route element={<RequireAuth allowedRoles={[2001]} />}>
 					<Route path="/" element={<Homepage />} />
 					<Route path="rings" element={<TrackerRings />} />
+					<Route path="dashboard" element={<BudgetDashboard />} />
 				</Route>
 				<Route element={<RequireAuth allowedRoles={[5150, 3005, 7776]} />}>
 					<Route path="admin" element={<AdminDashboard />} />
