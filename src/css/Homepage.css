@@ -11,12 +11,12 @@
 }
 
 .gross-income-submission-form {
-    min-width: 50vw;
-    margin: 30px;
-    justify-content: space-around;
-    background-color: #0a0a29;
-    padding: 1rem;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-  }
+	min-width: 30vw;
+	margin: 30px;
+	justify-content: space-around;
+	background-color: #0a0a29;
+	padding: 1rem;
+	border-radius: 6px;
+	display: flex;
+	flex-direction: column;
+}

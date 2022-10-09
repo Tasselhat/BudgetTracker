@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import "../css/Homepage.css"
 
 const SAVINGS_URL = "/savings";
 const controller = new AbortController();
