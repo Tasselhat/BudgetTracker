@@ -12,6 +12,8 @@ const controller = new AbortController();
 
 const GetFullBudget = (updatedKey) => {
 	const [budget, setBudget] = useState();
+	const [isHovering, setIsHovering] = useState(false);
+	const [hoverId, setHoverId] = useState();
 
 	const [errMsg, setErrMsg] = useState("");
 	const [key, setKey] = useState(updatedKey);
@@ -43,7 +45,16 @@ const GetFullBudget = (updatedKey) => {
 			isMounted = false;
 			controller.abort();
 		};
-	}, [axiosPrivate]);
+	}, []);
+
+	const handleMouseOver = (id) => {
+		setIsHovering(true);
+		setHoverId(id);
+	};
+
+	const handleMouseOut = () => {
+		setIsHovering(false);
+	};
 
 	const handleExpensesTrashClick = async (e) => {
 		e.preventDefault();
@@ -134,12 +145,31 @@ const GetFullBudget = (updatedKey) => {
 					<p>No saving allocation</p>
 				)}
 				<br />
-				<h2>
-					Expense List
-					<button onClick={(e) => handleExpensesTrashClick(e)}>
-						<FaIcons.FaTrash></FaIcons.FaTrash>
-					</button>
-				</h2>
+				<div className="expense-list-title">
+					<h2>Expense List</h2>
+					{isHovering && hoverId === 1 && (
+						<button
+							className="delete-button"
+							value={1}
+							onClick={(e) => handleExpensesTrashClick(e)}
+							onMouseOver={() => handleMouseOver(1)}
+							onMouseOut={() => handleMouseOut()}
+						>
+							<FaIcons.FaTrash />
+							<p>&nbsp;Reset Expense List</p>
+						</button>
+					)}
+					{(!isHovering || hoverId !== 1) && (
+						<button
+							className="delete-button"
+							onClick={(e) => handleExpensesTrashClick(e)}
+							onMouseOver={() => handleMouseOver(1)}
+							onMouseOut={() => handleMouseOut()}
+						>
+							<FaIcons.FaTrash />
+						</button>
+					)}
+				</div>
 				{budget?.expenses?.length ? (
 					<ul>
 						{budget.expenses.map((expenses, i) => (
@@ -148,33 +178,54 @@ const GetFullBudget = (updatedKey) => {
 								or ${expenses?.expenseFlatCost}
 							</li>
 						))}
-						<br />
 					</ul>
 				) : (
 					<h2>No Expenses found</h2>
 				)}
-				<h2>
-					Saving/Investments List
-					<button onClick={(e) => handleSavingsTrashClick(e)}>
-						<FaIcons.FaTrash></FaIcons.FaTrash>
-					</button>
-				</h2>
+				<div className="saving-list-title">
+					<h2>Saving/Investments List</h2>
+					{isHovering && hoverId === 2 && (
+						<button
+							className="delete-button"
+							value={2}
+							onClick={(e) => handleExpensesTrashClick(e)}
+							onMouseOver={() => handleMouseOver(2)}
+							onMouseOut={() => handleMouseOut()}
+						>
+							<FaIcons.FaTrash />
+							<p>&nbsp;Reset Saving List</p>
+						</button>
+					)}
+					{(!isHovering || hoverId !== 2) && (
+						<button
+							className="delete-button"
+							onClick={(e) => handleExpensesTrashClick(e)}
+							onMouseOver={() => handleMouseOver(2)}
+							onMouseOut={() => handleMouseOut()}
+						>
+							<FaIcons.FaTrash />
+						</button>
+					)}
+				</div>
 				{budget?.savings?.length ? (
-					<ul>
-						{budget.savings.map((savings, i) => (
-							<li key={i}>
-								{savings?.savingName} {savings?.savingPercentage}% of income or
-								${savings?.savingFlatCost}
-							</li>
-						))}
-						<br />
-					</ul>
+					<>
+						<ul>
+							{budget.savings.map((savings, i) => (
+								<li key={i}>
+									{savings?.savingName} {savings?.savingPercentage}% of income
+									or ${savings?.savingFlatCost}
+								</li>
+							))}
+						</ul>
+					</>
 				) : (
 					<div>
 						<h2>No Expenses found</h2>
 						<br />
 					</div>
 				)}
+				<br />
+				<br />
 				<button onClick={(e) => handleDelete(e)}>Reset Budget</button>
 			</article>
 		</div>

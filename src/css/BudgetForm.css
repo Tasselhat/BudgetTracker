@@ -11,22 +11,22 @@
 }
 
 .expense-list-wrapper {
-  background-color: #0a0a29;
+	background-color: #0a0a29;
 	text-shadow: 1px 2px 3px #040404;
 	padding: 1rem;
-  margin: 30px;
+	margin: 30px;
 	border-radius: 6px;
 }
 
 .budget-submission-form {
-  min-width: 50vw;
-  margin: 30px;
-  justify-content: space-around;
-  background-color: #0a0a29;
-  padding: 1rem;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
+	min-width: 50vw;
+	margin: 30px;
+	justify-content: space-around;
+	background-color: #0a0a29;
+	padding: 1rem;
+	border-radius: 6px;
+	display: flex;
+	flex-direction: column;
 }
 
 .budget-submission-form input {
@@ -42,7 +42,6 @@
 	border-width: 1px;
 }
 
-
 .budget-submission-form form {
 	margin: 10px;
 }
@@ -51,9 +50,56 @@
 	color: transparent;
 }
 
+.expense-list-title {
+	display: flex;
+	align-items: center;
+}
+
+.saving-list-title {
+	display: flex;
+	align-items: center;
+}
+
+.delete-button {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	font-weight: 500;
+	font-style: normal;
+	font-size: calc(0.05 * 1vw + 1rem);
+	letter-spacing: 0em;
+	text-transform: none;
+	line-height: 1.6em;
+	border-color: #040404;
+	color: #040404;
+	border-style: solid;
+	cursor: pointer;
+	border-width: 1px;
+	border-radius: 6px;
+	transition: background-color 200ms, color 60ms, padding 200ms, margin 200ms;
+}
+
+.delete-button:hover {
+	color: #040404;
+	padding-top: 0.2vw;
+	padding-right: 0.3vw;
+	padding-bottom: 0.2vw;
+	padding-left: 0.3vw;
+	opacity: 0.9;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
+}
+
+.delete-button:active {
+	opacity: 0.6;
+}
+
 @media (max-width: 1200px) {
-  .budget-submitter-wrapper {
-    flex-direction: column;
-    justify-content: space-around;
-  }
+	.budget-submitter-wrapper {
+		flex-direction: column;
+		justify-content: space-around;
+	}
 }
