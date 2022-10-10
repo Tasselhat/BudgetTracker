@@ -320,7 +320,7 @@ export const BudgetSubmitter = () => {
 						onFocus={() => setExpensePercentageFocus(true)}
 						onBlur={() => setExpensePercentageFocus(false)}
 					/>
-					<label htmlFor="expensePercentage">% of income </label>
+					<label htmlFor="expensePercentage">% of income</label>
 					<label htmlFor="expenseFlatCost">or cost in $</label>
 					<input
 						name="expenseFlatCost"

@@ -180,7 +180,7 @@ const GetFullBudget = (updatedKey) => {
 						))}
 					</ul>
 				) : (
-					<h2>No Expenses found</h2>
+					<h3>No Expenses found</h3>
 				)}
 				<div className="saving-list-title">
 					<h2>Saving/Investments List</h2>
@@ -188,7 +188,7 @@ const GetFullBudget = (updatedKey) => {
 						<button
 							className="delete-button"
 							value={2}
-							onClick={(e) => handleExpensesTrashClick(e)}
+							onClick={(e) => handleSavingsTrashClick(e)}
 							onMouseOver={() => handleMouseOver(2)}
 							onMouseOut={() => handleMouseOut()}
 						>
@@ -199,7 +199,7 @@ const GetFullBudget = (updatedKey) => {
 					{(!isHovering || hoverId !== 2) && (
 						<button
 							className="delete-button"
-							onClick={(e) => handleExpensesTrashClick(e)}
+							onClick={(e) => handleSavingsTrashClick(e)}
 							onMouseOver={() => handleMouseOver(2)}
 							onMouseOut={() => handleMouseOut()}
 						>
@@ -220,13 +220,13 @@ const GetFullBudget = (updatedKey) => {
 					</>
 				) : (
 					<div>
-						<h2>No Expenses found</h2>
+						<h3>No Savings found</h3>
 						<br />
 					</div>
 				)}
 				<br />
 				<br />
-				<button onClick={(e) => handleDelete(e)}>Reset Budget</button>
+				<button className="delete-button" onClick={(e) => handleDelete(e)}>Reset Budget</button>
 			</article>
 		</div>
 	);
