@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../css/TrackerRings.css";
-import GetBudget from "./GetBudget";
+import GetExpenses from "./GetExpenses";
 import GetSavings from "./GetSavings";
 
 export default class TrackerRings extends React.Component {
@@ -28,7 +28,7 @@ export default class TrackerRings extends React.Component {
 			<section>
 				<div className="tracker-rings-container">
 					<div className="chart-container">
-						<GetBudget key={this.state.updatedKey0} />
+						<GetExpenses key={this.state.updatedKey0} />
 						<GetSavings key={this.state.updatedKey1} />
 					</div>
 					<button className="updateButton" onClick={(e) => this.handleClick(e)}>

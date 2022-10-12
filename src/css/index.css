@@ -38,3 +38,11 @@ code {
 	padding: 0;
 	font-family: "IBM-VGA-9x16";
 }
+
+button:hover {
+	opacity: 0.9;
+}
+
+button:active {
+	opacity: 0.8;
+}

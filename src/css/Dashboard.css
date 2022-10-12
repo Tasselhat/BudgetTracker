@@ -1,0 +1,51 @@
+.dashboard-wrapper {
+	background: no-repeat
+		url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	min-height: calc(100vh - 80px);
+	padding: 1rem 0.5rem;
+	color: rgb(170, 176, 182);
+}
+
+.gross-income-submission-form {
+	min-width: 30vw;
+	margin: 30px;
+	justify-content: space-around;
+	background-color: #0a0a29;
+	padding: 1rem;
+	border-radius: 6px;
+	display: flex;
+	flex-direction: column;
+}
+
+.gross-income-submission-form input {
+	background-color: transparent;
+	color: rgb(144, 151, 158);
+	height: 1.35rem;
+	border-radius: 6px;
+	border-color: white;
+}
+
+.gross-income-submission-form input:hover {
+	opacity: 0.9;
+}
+
+.gross-income-submission-form input:active {
+	opacity: 0.7;
+}
+
+.gross-income-submission-form input:disabled {
+	opacity: 0.4;
+	border-width: 1px;
+}
+
+.dashboard-info-panel {
+	background-color: #0a0a29;
+	text-shadow: 1px 2px 3px #040404;
+	padding: 1rem;
+	margin: 30px;
+	border-radius: 6px;
+}

@@ -226,7 +226,7 @@ const GetFullBudget = (updatedKey) => {
 				)}
 				<br />
 				<br />
-				<button className="delete-button" onClick={(e) => handleDelete(e)}>Reset Budget</button>
+				<button className="reset-button" onClick={(e) => handleDelete(e)}>Reset Budget</button>
 			</article>
 		</div>
 	);

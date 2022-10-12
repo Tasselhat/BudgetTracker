@@ -2,17 +2,19 @@ import React, { useRef, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import "../css/Homepage.css"
+import "../css/Dashboard.css";
 
 const SAVINGS_URL = "/savings";
 const controller = new AbortController();
 
-export const Homepage = () => {
+export const Dashboard = () => {
+	const [budget, setBudget] = useState();
 	const grossIncomeRef = useRef();
 	const errRef = useRef();
 
 	const [grossIncome, setGrossIncome] = useState("");
 	const [grossIncomeFocus, setGrossIncomeFocus] = useState(false);
+	const [savingAmount, setSavingAmount] = useState(false);
 
 	const [errMsg, setErrMsg] = useState("");
 
@@ -21,7 +23,50 @@ export const Homepage = () => {
 	const location = useLocation();
 
 	useEffect(() => {
+		let isMounted = true;
+		const controller = new AbortController();
+
+		const getBudgets = async () => {
+			try {
+				const response = await axiosPrivate.get("/expenses", {
+					signal: controller.signal,
+				});
+				console.log(response.data);
+				isMounted && setBudget(response.data);
+				const budgetObject = response.data;
+				const income = budgetObject.income;
+				const savingsObject = budgetObject.saving;
+				const savingTotalAmount = !savingsObject ? 0 : savingsObject.total;
+				const savingPercentOfIncome = !savingsObject
+					? 0
+					: savingsObject.percent;
+				if (savingTotalAmount && savingPercentOfIncome) {
+					const savingAsPerecentOfIncome = Math.round(
+						income * (savingPercentOfIncome / 100)
+					);
+					if (savingAsPerecentOfIncome > savingTotalAmount) {
+						setSavingAmount(savingAsPerecentOfIncome);
+					} else {
+						setSavingAmount(savingTotalAmount);
+					}
+				} else if (!savingTotalAmount) {
+					setSavingAmount(Math.round(income * (savingPercentOfIncome / 100)));
+				} else {
+					setSavingAmount(savingTotalAmount);
+				}
+			} catch (err) {
+				console.error(err);
+				navigate("/login", { state: { from: location }, replace: true });
+			}
+		};
+
+		getBudgets();
 		grossIncomeRef.current.focus();
+
+		return () => {
+			isMounted = false;
+			controller.abort();
+		};
 	}, []);
 
 	useEffect(() => {
@@ -66,7 +111,7 @@ export const Homepage = () => {
 	};
 
 	return (
-		<section className="homepage-wrapper">
+		<section className="dashboard-wrapper">
 			<div className="gross-income-submission-form">
 				<form onSubmit={(e) => handleSubmitGrossIncome(e)}>
 					<h3>Enter your gross annual income</h3>
@@ -89,6 +134,7 @@ export const Homepage = () => {
 					&nbsp;
 					<input
 						disabled={!grossIncome || grossIncome == 0 ? true : false}
+						className="submit-button"
 						type="submit"
 						value="Submit"
 						onSubmit={(e) => handleSubmitGrossIncome(e)}
@@ -104,6 +150,9 @@ export const Homepage = () => {
 						Must be a whole number greater than 0. <br />
 					</p>
 				</form>
+			</div>
+			<div className="dashboard-info-panel">
+				<p>You are saving approx. {savingAmount} from each paycheck. </p>
 			</div>
 		</section>
 	);

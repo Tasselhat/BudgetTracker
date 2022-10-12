@@ -120,7 +120,7 @@ consider adjusting savings/investments amounts, increasing monthly income, or ad
 	if (arrayExists) {
 		return (
 			<div>
-				<h2>Breakdown of Savings/Investments:</h2>
+				<h2 className="header">Breakdown of Savings/Investments:</h2>
 				<ChartComponent data={chartData} />
 				<p
 					className={noSavingWarning ? "errmsg" : "offscreen"}
@@ -139,7 +139,7 @@ consider adjusting savings/investments amounts, increasing monthly income, or ad
 	} else {
 		return (
 			<>
-				<h2>Example savings chart:</h2>
+				<h2 className="header">Example savings chart:</h2>
 				<ChartComponent data={savingsData} />
 			</>
 		);

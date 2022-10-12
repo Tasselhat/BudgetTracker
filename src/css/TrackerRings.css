@@ -1,14 +1,24 @@
-h2 {
+.header {
 	margin: 0.5vh 0 0.5vh 0;
+	color: #040404;
 }
 
 .tracker-rings-container {
-	background-color: #7c7c7c;
+	background: no-repeat
+		url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	min-height: calc(100vh - 80px);
 	padding: 0rem 0.5rem;
+}
+
+.chart-container {
+	text-shadow: 1px 2px 3px #161616;
+	padding: 1rem;
+	border-radius: 6px;
+	background: none;
+	width: 75vw;
 }
 
 .updateButton {
@@ -95,10 +105,6 @@ h2 {
 
 .changeButton:active {
 	opacity: 0.6;
-}
-
-.chart-container {
-	width: 75vw;
 }
 
 .container {

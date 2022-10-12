@@ -1,10 +1,10 @@
 import React from "react";
-import { Homepage } from "../Components/Homepage";
+import { Dashboard } from "../Components/Dashboard";
 
 export default function BudgetDashboard() {
 	return (
 		<section>
-			<Homepage />
+			<Dashboard />
 		</section>
 	);
 }

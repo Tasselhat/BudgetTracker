@@ -14,7 +14,7 @@ const data = [
 	{ label: "Extra Income", value: 234 },
 ];
 
-const GetBudget = (updatedKey) => {
+const GetExpenses = (updatedKey) => {
 	const [budget, setBudget] = useState();
 	const [key, setKey] = useState(updatedKey);
 	const [chartData, setChartData] = useState();
@@ -146,7 +146,7 @@ const GetBudget = (updatedKey) => {
 	if (arrayExists) {
 		return (
 			<section>
-				<h2>Breakdown of expenses:</h2>
+				<h2 className="header">Breakdown of expenses:</h2>
 				<ChartComponent data={chartData} />
 				<p
 					className={noIncomeWarning ? "errmsg" : "offscreen"}
@@ -165,11 +165,11 @@ const GetBudget = (updatedKey) => {
 	} else {
 		return (
 			<>
-				<h2>Example expenses chart:</h2>
+				<h2 className="header">Example expenses chart:</h2>
 				<ChartComponent data={data} />
 			</>
 		);
 	}
 };
 
-export default GetBudget;
+export default GetExpenses;
