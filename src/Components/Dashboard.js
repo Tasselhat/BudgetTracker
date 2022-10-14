@@ -12,6 +12,7 @@ export const Dashboard = () => {
 	const grossIncomeRef = useRef();
 	const errRef = useRef();
 
+	const [compoundSavings, setCompoundSavings] = useState("");
 	const [grossIncome, setGrossIncome] = useState("");
 	const [grossIncomeFocus, setGrossIncomeFocus] = useState(false);
 	const [savingAmount, setSavingAmount] = useState(false);
@@ -33,6 +34,15 @@ export const Dashboard = () => {
 				});
 				console.log(response.data);
 				isMounted && setBudget(response.data);
+				const compoundInterest = (principal, add, years, rate) => {
+					let princ = principal;
+					for (let i = 1; i <= 12 * years; i++) {
+						princ += add;
+						princ += princ * (rate / 12);
+						console.log(princ);
+					}
+					setCompoundSavings(princ.toFixed(2));
+				};
 				const budgetObject = response.data;
 				const income = budgetObject.income;
 				const savingsObject = budgetObject.saving;
@@ -46,13 +56,27 @@ export const Dashboard = () => {
 					);
 					if (savingAsPerecentOfIncome > savingTotalAmount) {
 						setSavingAmount(savingAsPerecentOfIncome);
+						compoundInterest(0, savingAsPerecentOfIncome * 2, 20, 0.07);
 					} else {
 						setSavingAmount(savingTotalAmount);
+						compoundInterest(0, savingTotalAmount * 2, 20, 0.07);
 					}
 				} else if (!savingTotalAmount) {
 					setSavingAmount(Math.round(income * (savingPercentOfIncome / 100)));
+					compoundInterest(
+						0,
+						Math.round(income * (savingPercentOfIncome / 100)) * 2,
+						20,
+						0.07
+					);
 				} else {
 					setSavingAmount(savingTotalAmount);
+					compoundInterest(
+						0,
+						savingTotalAmount ? savingTotalAmount * 2 : 100,
+						20,
+						0.07
+					);
 				}
 			} catch (err) {
 				console.error(err);
@@ -152,7 +176,33 @@ export const Dashboard = () => {
 				</form>
 			</div>
 			<div className="dashboard-info-panel">
-				<p>You are saving approx. {savingAmount} from each paycheck. </p>
+				<p>
+					Your gross income is
+					{budget?.yearlyGrossIncome ? (
+						<span> ${budget.yearlyGrossIncome} </span>
+					) : (
+						<span> *No income found* </span>
+					)}
+				</p>
+				<p>
+					You are saving approx
+					{savingAmount ? (
+						<span> ${savingAmount} </span>
+					) : (
+						<span> *No saving found* </span>
+					)}
+					from each paycheck.
+					<p>
+						Investing this much with an average yearly return of %7 will result
+						in a total of
+						{compoundSavings ? (
+							<span> ${compoundSavings} </span>
+						) : (
+							<span> *No saving found* </span>
+						)}
+						after 20 years. (Assuming bi-weekly savings starting from $0, compounding monthly).
+					</p>
+				</p>
 			</div>
 		</section>
 	);

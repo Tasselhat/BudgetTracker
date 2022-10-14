@@ -52,7 +52,6 @@ const GetExpenses = (updatedKey) => {
 				if (expensesArrayLength > 0) {
 					setArrayExists(true);
 				}
-				console.log(expensesArrayLength);
 				if (savingTotalAmount && savingPercentOfIncome) {
 					const savingAsPerecentOfIncome = Math.round(
 						income * (savingPercentOfIncome / 100)
@@ -112,7 +111,6 @@ const GetExpenses = (updatedKey) => {
 					}
 				}
 				setChartData(chartData);
-				console.log(chartData);
 				const chartDataSum = chartData.reduce((accumulator, object) => {
 					return accumulator + object.value;
 				}, 0);
@@ -128,7 +126,6 @@ const GetExpenses = (updatedKey) => {
 					);
 				}
 				setChartData(chartData);
-				console.log(chartData);
 			} catch (err) {
 				console.error(err);
 				navigate("/login", { state: { from: location }, replace: true });

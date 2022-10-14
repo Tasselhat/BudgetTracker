@@ -41,7 +41,6 @@ const drawChart = (element, data) => {
 		"#846c9b",
 		"#846c9b",
 	];
-	console.log(data);
 	const boxSize = 500;
 	const dataSum = data.reduce((accumulator, object) => {
 		return accumulator + object.value;

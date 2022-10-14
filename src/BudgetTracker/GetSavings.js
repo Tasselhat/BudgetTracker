@@ -54,7 +54,6 @@ const GetSavings = (updatedKey) => {
 					savingAsPerecentOfIncome > savingTotalAmount
 						? savingAsPerecentOfIncome
 						: savingTotalAmount;
-				console.log(savingsArrayLength);
 				if (!savingTotal) {
 					for (let i = 0; i < savingsArrayLength; i++) {
 						chartData.push({
@@ -85,7 +84,6 @@ const GetSavings = (updatedKey) => {
 					}
 				}
 				setChartData(chartData);
-				console.log(chartData);
 				const chartDataSum = chartData.reduce((accumulator, object) => {
 					return accumulator + object.value;
 				}, 0);
@@ -102,7 +100,6 @@ consider adjusting savings/investments amounts, increasing monthly income, or ad
 					);
 				}
 				setChartData(chartData);
-				console.log(chartData);
 			} catch (err) {
 				console.error(err);
 				navigate("/login", { state: { from: location }, replace: true });
