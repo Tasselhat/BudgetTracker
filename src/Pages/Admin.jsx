@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import Users from "../Components/Users";
+import Budgets from "../Components/Budgets";
 
 export default function AdminDashboard() {
 	const [displayUsers, setDisplayUsers] = useState(true);
-	const [displayBudgets, setDisplayBudgets] = useState(false);
+	const [displayBudgets, setDisplayBudgets] = useState(true);
 
 	return (
 		<>
@@ -13,9 +14,15 @@ export default function AdminDashboard() {
 				<section>
 					<Users />
 				</section>
-			) : displayBudgets ? (
+			) : (
 				<section>
-					<div />
+					<h1>Tools go here</h1>
+					<br />
+				</section>
+			)}
+			{displayBudgets ? (
+				<section>
+					<Budgets />
 				</section>
 			) : (
 				<section>

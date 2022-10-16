@@ -26,6 +26,8 @@ function App() {
 					<Route path="/" element={<Homepage />} />
 					<Route path="rings" element={<TrackerRings />} />
 					<Route path="dashboard" element={<BudgetDashboard />} />
+					<Route path="goals" element={<BudgetDashboard />} />
+					<Route path="share" element={<BudgetDashboard />} />
 				</Route>
 				<Route element={<RequireAuth allowedRoles={[5150, 3005, 7776]} />}>
 					<Route path="admin" element={<AdminDashboard />} />

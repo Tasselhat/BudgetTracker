@@ -139,7 +139,7 @@ export const Dashboard = () => {
 			<div className="gross-income-submission-form">
 				<form onSubmit={(e) => handleSubmitGrossIncome(e)}>
 					<h3>Enter your gross annual income</h3>
-					<label htmlFor="income">Yearly Income $</label>
+					<label htmlFor="grossIncome">Yearly Income $</label>
 					<input
 						name="grossIncome"
 						type="number"
@@ -189,7 +189,7 @@ export const Dashboard = () => {
 					{savingAmount ? (
 						<span> ${savingAmount} </span>
 					) : (
-						<span> *No saving found* </span>
+						<span> *No savings found* </span>
 					)}
 					from each paycheck.
 					<p>
@@ -198,7 +198,7 @@ export const Dashboard = () => {
 						{compoundSavings ? (
 							<span> ${compoundSavings} </span>
 						) : (
-							<span> *No saving found* </span>
+							<span> *No savings found* </span>
 						)}
 						after 20 years. (Assuming bi-weekly savings starting from $0, compounding monthly).
 					</p>

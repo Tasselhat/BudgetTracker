@@ -52,7 +52,7 @@ export default class Navbar extends React.Component {
 								<li key={index} className={item.cName}>
 									<Link to={item.path}>
 										{item.icon}
-										<span>{item.title}</span>
+										<span className="sidebar-item-title">{item.title}</span>
 									</Link>
 								</li>
 							);
@@ -73,7 +73,7 @@ export default class Navbar extends React.Component {
 								<li key={index} className={item.cName}>
 									<Link to={item.path}>
 										{item.icon}
-										<span>{item.title}</span>
+										<span className="profile-menu-item-title">{item.title}</span>
 									</Link>
 								</li>
 							);

@@ -138,6 +138,12 @@
 	width: 100%;
 }
 
-svg {
-	margin-right: 16px;
+.sidebar-item-title {
+	margin-left: 16px;
+	margin-top: 2px;
+}
+
+.profile-menu-item-title {
+	margin-left: 16px;
+	margin-top: 2px;
 }
