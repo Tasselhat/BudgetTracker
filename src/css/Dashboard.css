@@ -49,3 +49,15 @@
 	margin: 30px;
 	border-radius: 6px;
 }
+
+.varaible-form-wrapper input {
+	background-color: transparent;
+	color: rgb(144, 151, 158);
+	height: 1.35rem;
+	border-radius: 6px;
+	border-color: white;
+}
+
+.flex {
+	display: flex;
+}

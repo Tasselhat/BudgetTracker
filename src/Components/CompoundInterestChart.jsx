@@ -42,7 +42,7 @@ function CompoundInterestChart({ initialAmount, period, growthRate, monthlyContr
   return (
     <>
       <h2>Projected Growth</h2>
-      <div style={{ width: "100%", height: 300 }}>
+      <div style={{ width: "90vw", height: 300 }}>
         <ResponsiveContainer>
           <LineChart
             width={500}

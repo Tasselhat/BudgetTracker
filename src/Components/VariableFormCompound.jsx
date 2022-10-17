@@ -1,82 +1,15 @@
 import * as React from "react";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import defaultState from "./dashboardDefaults";
+import "../css/Dashboard.css";
 
-const controller = new AbortController();
-
-function VariablesFormCompound({ onUpdate }) {
-	const [state, setState] = React.useState(defaultState);
-	const [budget, setBudget] = React.useState();
-
-	const { initialAmount, period, growthRate, monthlyContribution } = state;
-
-	const axiosPrivate = useAxiosPrivate();
-
-	React.useEffect(() => {
-		let isMounted = true;
-		const controller = new AbortController();
-
-		const getBudgets = async () => {
-			try {
-				const response = await axiosPrivate.get("/expenses", {
-					signal: controller.signal,
-				});
-				console.log(response.data);
-				isMounted && setBudget(response.data);
-
-				const budgetObject = response.data;
-				const income = budgetObject.income;
-				const savingsObject = budgetObject.saving;
-				const savingTotalAmount = !savingsObject ? 0 : savingsObject.total;
-				const savingPercentOfIncome = !savingsObject
-					? 0
-					: savingsObject.percent;
-
-				if (savingTotalAmount && savingPercentOfIncome) {
-					const savingAsPerecentOfIncome = Math.round(
-						income * (savingPercentOfIncome / 100)
-					);
-					if (savingAsPerecentOfIncome > savingTotalAmount) {
-						setState({
-							...state,
-							monthlyContribution: Number(savingAsPerecentOfIncome),
-						});
-					} else {
-						setState({
-							...state,
-							monthlyContribution: Number(savingTotalAmount),
-						});
-					}
-				} else if (!savingTotalAmount) {
-					setState({
-						...state,
-						monthlyContribution: Number(
-							Math.round(income * (savingPercentOfIncome / 100))
-						),
-					});
-				} else {
-					setState({
-						...state,
-						monthlyContribution: Number(savingTotalAmount),
-					});
-				}
-			} catch (err) {
-				console.error(err);
-			}
-		};
-
-		getBudgets();
-
-		return () => {
-			isMounted = false;
-			controller.abort();
-		};
-	});
+const VariablesFormCompound = ({ onUpdate, initialAmount, period, growthRate, monthlyContribution }) => {
+	
+	const [state, setState] = React.useState();
 
 	return (
 		<section>
+			<br />
 			<h2>Financials</h2>
-			<div className="flex">
+			<div className="varaible-form-wrapper">
 				<label htmlFor="initialAmount">
 					Initial Amount ($)
 					<input
@@ -114,7 +47,7 @@ function VariablesFormCompound({ onUpdate }) {
 					/>
 				</label>
 				<label htmlFor="monthlyContribution">
-					Monthly Contribution (£)
+					Monthly Contribution ($)
 					<input
 						type="number"
 						id="monthlyContribution"
@@ -131,6 +64,6 @@ function VariablesFormCompound({ onUpdate }) {
 			</button>
 		</section>
 	);
-}
+};
 
 export default VariablesFormCompound;
