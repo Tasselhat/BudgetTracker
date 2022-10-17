@@ -2,20 +2,25 @@ import React, { useRef, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import CompoundInterestChart from "./CompoundInterestChart";
+
+import defaultState from "../Components/dashboardDefaults";
 import "../css/Dashboard.css";
+import VariablesFormCompound from "./VariableFormCompound";
 
 const SAVINGS_URL = "/savings";
 const controller = new AbortController();
 
 export const Dashboard = () => {
 	const [budget, setBudget] = useState();
+	const [graphData, setGraphData] = useState(defaultState);
 	const grossIncomeRef = useRef();
 	const errRef = useRef();
 
 	const [compoundSavings, setCompoundSavings] = useState("");
 	const [grossIncome, setGrossIncome] = useState("");
+	const [savingAmount, setSavingAmount] = useState();
 	const [grossIncomeFocus, setGrossIncomeFocus] = useState(false);
-	const [savingAmount, setSavingAmount] = useState(false);
 
 	const [errMsg, setErrMsg] = useState("");
 
@@ -39,9 +44,8 @@ export const Dashboard = () => {
 					for (let i = 1; i <= 12 * years; i++) {
 						princ += add;
 						princ += princ * (rate / 12);
-						console.log(princ);
 					}
-					setCompoundSavings(princ.toFixed(2));
+					if (princ > 0) setCompoundSavings(princ.toFixed(2));
 				};
 				const budgetObject = response.data;
 				const income = budgetObject.income;
@@ -85,7 +89,6 @@ export const Dashboard = () => {
 		};
 
 		getBudgets();
-		grossIncomeRef.current.focus();
 
 		return () => {
 			isMounted = false;
@@ -184,6 +187,7 @@ export const Dashboard = () => {
 						<span> *No income found* </span>
 					)}
 				</p>
+				<br />
 				<p>
 					You are saving approx
 					{savingAmount ? (
@@ -191,18 +195,21 @@ export const Dashboard = () => {
 					) : (
 						<span> *No savings found* </span>
 					)}
-					from each paycheck.
-					<p>
-						Investing this much with an average yearly return of %7 will result
-						in a total of
-						{compoundSavings ? (
-							<span> ${compoundSavings} </span>
-						) : (
-							<span> *No savings found* </span>
-						)}
-						after 20 years. (Assuming bi-weekly savings starting from $0, compounding monthly).
-					</p>
+					from each paycheck. Investing this much with an average yearly return
+					of %7 will result in a total of
+					{compoundSavings ? (
+						<span> ${compoundSavings} </span>
+					) : (
+						<span> *No savings found* </span>
+					)}
+					after 20 years. (Assuming bi-weekly savings starting from $0,
+					compounding monthly).
 				</p>
+				<h1>Annual Compound Interest Calculator</h1>
+				<hr />
+				<VariablesFormCompound onUpdate={variables => setGraphData(variables)} />
+				<br />
+				<CompoundInterestChart {...graphData} />
 			</div>
 		</section>
 	);

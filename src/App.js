@@ -9,9 +9,13 @@ import BudgetDashboard from "./Pages/BudgetDashboard";
 import Unauthorized from "./Pages/Unauthorized.jsx";
 import EditorDashboard from "./Pages/Editor.jsx";
 import Missing from "./Pages/Missing.jsx";
-import Layout from "./Pages/Layout.js";
+import Layout from "./context/Layout.js";
 import RequireAuth from "./Components/RequireAuth";
 import Logout from "./Components/Logout";
+import Goals from "./Pages/Goals";
+import Settings from "./Pages/Settings";
+import Share from "./Pages/Share";
+import Help from "./Pages/Help";
 
 function App() {
 	return (
@@ -26,8 +30,10 @@ function App() {
 					<Route path="/" element={<Homepage />} />
 					<Route path="rings" element={<TrackerRings />} />
 					<Route path="dashboard" element={<BudgetDashboard />} />
-					<Route path="goals" element={<BudgetDashboard />} />
-					<Route path="share" element={<BudgetDashboard />} />
+					<Route path="goals" element={<Goals />} />
+					<Route path="share" element={<Share />} />
+					<Route path="help" element={<Help />} />
+					<Route path="settings" element={<Settings />} />
 				</Route>
 				<Route element={<RequireAuth allowedRoles={[5150, 3005, 7776]} />}>
 					<Route path="admin" element={<AdminDashboard />} />

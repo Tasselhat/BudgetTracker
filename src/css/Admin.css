@@ -1,0 +1,41 @@
+.admin-wrapper {
+	background: no-repeat
+		url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	min-height: calc(100vh - 80px);
+	padding: 1rem 0.5rem;
+	color: rgb(170, 176, 182);
+}
+
+.users-wrapper {
+	background-color: #0a0a29;
+	text-shadow: 1px 2px 3px #040404;
+	padding: 2rem;
+	margin: 30px;
+	border-radius: 6px;
+	min-width: 30vw;
+}
+
+.budgets-wrapper {
+	background-color: #0a0a29;
+	text-shadow: 1px 2px 3px #040404;
+	margin: 30px;
+	padding: 2rem;
+	border-radius: 6px;
+	min-width: 30vw;
+}
+
+.unauth-page-wrapper {
+	background: no-repeat
+		url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	min-height: calc(100vh - 80px);
+	padding: 1rem 0.5rem;
+	color: rgb(170, 176, 182);
+}

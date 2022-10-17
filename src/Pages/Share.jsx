@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function EditorDashboard() {
+export default function SharePage() {
   return <h1>Share</h1>;
 }

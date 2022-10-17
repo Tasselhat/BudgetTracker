@@ -7,7 +7,7 @@ export default function Unauthorized() {
 	const goBack = () => navigate(-1);
 
 	return (
-		<section>
+		<section className="unauth-page-wrapper">
 			<h1>Acess Denied</h1>
 			<p>You do not have access to the requested page</p>
 			<div>
