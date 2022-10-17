@@ -8,6 +8,7 @@ import defaultState from "../Components/dashboardDefaults";
 import "../css/Dashboard.css";
 import VariablesFormCompound from "./VariableFormCompound";
 
+const EXPENSES_URL = "/expenses";
 const SAVINGS_URL = "/savings";
 const controller = new AbortController();
 
@@ -34,7 +35,7 @@ export const Dashboard = () => {
 
 		const getBudgets = async () => {
 			try {
-				const response = await axiosPrivate.get("/expenses", {
+				const response = await axiosPrivate.get(EXPENSES_URL, {
 					signal: controller.signal,
 				});
 				console.log(response.data);
@@ -60,13 +61,27 @@ export const Dashboard = () => {
 					);
 					if (savingAsPerecentOfIncome > savingTotalAmount) {
 						setSavingAmount(savingAsPerecentOfIncome);
+						setGraphData({
+							...graphData,
+							monthlyContribution: Number(savingAsPerecentOfIncome),
+						});
 						compoundInterest(0, savingAsPerecentOfIncome * 2, 20, 0.07);
 					} else {
 						setSavingAmount(savingTotalAmount);
+						setGraphData({
+							...graphData,
+							monthlyContribution: Number(savingTotalAmount),
+						});
 						compoundInterest(0, savingTotalAmount * 2, 20, 0.07);
 					}
 				} else if (!savingTotalAmount) {
 					setSavingAmount(Math.round(income * (savingPercentOfIncome / 100)));
+					setGraphData({
+						...graphData,
+						monthlyContribution: Number(
+							Math.round(income * (savingPercentOfIncome / 100))
+						),
+					});
 					compoundInterest(
 						0,
 						Math.round(income * (savingPercentOfIncome / 100)) * 2,
@@ -75,6 +90,10 @@ export const Dashboard = () => {
 					);
 				} else {
 					setSavingAmount(savingTotalAmount);
+					setGraphData({
+						...graphData,
+						monthlyContribution: Number(savingTotalAmount),
+					});
 					compoundInterest(
 						0,
 						savingTotalAmount ? savingTotalAmount * 2 : 100,
@@ -207,7 +226,10 @@ export const Dashboard = () => {
 				</p>
 				<h1>Annual Compound Interest Calculator</h1>
 				<hr />
-				<VariablesFormCompound onUpdate={variables => setGraphData(variables)} />
+				<VariablesFormCompound
+					onUpdate={(variables) => setGraphData(variables)}
+					{...graphData}
+				/>
 				<br />
 				<CompoundInterestChart {...graphData} />
 			</div>
