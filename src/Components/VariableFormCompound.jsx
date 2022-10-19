@@ -1,9 +1,19 @@
 import * as React from "react";
 import "../css/Dashboard.css";
 
-const VariablesFormCompound = ({ onUpdate, initialAmount, period, growthRate, monthlyContribution }) => {
-	
-	const [state, setState] = React.useState();
+const VariablesFormCompound = ({
+	onUpdate,
+	initialAmount,
+	period,
+	growthRate,
+	monthlyContribution,
+}) => {
+	const [state, setState] = React.useState({
+		initialAmount: initialAmount,
+		period: period,
+		growthRate: growthRate,
+		monthlyContribution: monthlyContribution,
+	});
 
 	return (
 		<section>
@@ -16,7 +26,7 @@ const VariablesFormCompound = ({ onUpdate, initialAmount, period, growthRate, mo
 						type="number"
 						id="initialAmount"
 						name="initialAmount"
-						value={initialAmount}
+						value={state.initialAmount}
 						onChange={({ target }) =>
 							setState({ ...state, initialAmount: Number(target.value) })
 						}
@@ -28,7 +38,7 @@ const VariablesFormCompound = ({ onUpdate, initialAmount, period, growthRate, mo
 						type="number"
 						id="period"
 						name="period"
-						value={period}
+						value={state.period}
 						onChange={({ target }) =>
 							setState({ ...state, period: Number(target.value) })
 						}
@@ -40,7 +50,7 @@ const VariablesFormCompound = ({ onUpdate, initialAmount, period, growthRate, mo
 						type="number"
 						id="growthRate"
 						name="growthRate"
-						value={growthRate}
+						value={state.growthRate}
 						onChange={({ target }) =>
 							setState({ ...state, growthRate: Number(target.value) })
 						}
@@ -52,7 +62,7 @@ const VariablesFormCompound = ({ onUpdate, initialAmount, period, growthRate, mo
 						type="number"
 						id="monthlyContribution"
 						name="monthlyContribution"
-						value={monthlyContribution}
+						value={state.monthlyContribution}
 						onChange={({ target }) =>
 							setState({ ...state, monthlyContribution: Number(target.value) })
 						}

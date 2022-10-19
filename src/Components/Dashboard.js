@@ -65,14 +65,14 @@ export const Dashboard = () => {
 							...graphData,
 							monthlyContribution: Number(savingAsPerecentOfIncome),
 						});
-						compoundInterest(0, savingAsPerecentOfIncome * 2, 20, 0.07);
+						compoundInterest(0, savingAsPerecentOfIncome, 20, 0.07);
 					} else {
 						setSavingAmount(savingTotalAmount);
 						setGraphData({
 							...graphData,
 							monthlyContribution: Number(savingTotalAmount),
 						});
-						compoundInterest(0, savingTotalAmount * 2, 20, 0.07);
+						compoundInterest(0, savingTotalAmount, 20, 0.07);
 					}
 				} else if (!savingTotalAmount) {
 					setSavingAmount(Math.round(income * (savingPercentOfIncome / 100)));
@@ -84,7 +84,7 @@ export const Dashboard = () => {
 					});
 					compoundInterest(
 						0,
-						Math.round(income * (savingPercentOfIncome / 100)) * 2,
+						Math.round(income * (savingPercentOfIncome / 100)),
 						20,
 						0.07
 					);
@@ -96,7 +96,7 @@ export const Dashboard = () => {
 					});
 					compoundInterest(
 						0,
-						savingTotalAmount ? savingTotalAmount * 2 : 100,
+						savingTotalAmount ? savingTotalAmount : 100,
 						20,
 						0.07
 					);
@@ -221,9 +221,10 @@ export const Dashboard = () => {
 					) : (
 						<span> *No savings found* </span>
 					)}
-					after 20 years. (Assuming bi-weekly savings starting from $0,
+					after 20 years. (Assuming monthly savings starting from $0,
 					compounding monthly).
 				</p>
+				<br />
 				<h1>Annual Compound Interest Calculator</h1>
 				<hr />
 				<VariablesFormCompound

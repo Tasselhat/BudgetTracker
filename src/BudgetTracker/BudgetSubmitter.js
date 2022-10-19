@@ -389,7 +389,7 @@ export const BudgetSubmitter = () => {
 					</p>
 				</form>
 				<form onSubmit={(e) => handleSubmitSavingAmount(e)}>
-					<h3>How much would you like to save from each paycheck?</h3>
+					<h3>How much would you like to save each month?</h3>
 					<label htmlFor="totalSavingAmount">Save a total of $</label>
 					<input
 						name="totalSavingAmount"
@@ -421,7 +421,7 @@ export const BudgetSubmitter = () => {
 						onFocus={() => setTotalSavingPercentFocus(true)}
 						onBlur={() => setTotalSavingPercentFocus(false)}
 					/>
-					<label htmlFor="totalSavingPercent">% of each paycheck.</label>
+					<label htmlFor="totalSavingPercent">% of monthly income.</label>
 					&nbsp;
 					<input
 						disabled={
@@ -497,7 +497,7 @@ export const BudgetSubmitter = () => {
 						onFocus={() => setSavingPercentageFocus(true)}
 						onBlur={() => setSavingPercentageFocus(false)}
 					/>
-					<label htmlFor="savingPercentage">% of savings fund </label>
+					<label htmlFor="savingPercentage">% of savings fund</label>
 					<label htmlFor="savingFlatCost">or amount in $</label>
 					<input
 						name="savingFlatCost"
