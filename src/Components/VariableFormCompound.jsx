@@ -1,13 +1,7 @@
 import * as React from "react";
 import "../css/Dashboard.css";
 
-const VariablesFormCompound = ({
-	onUpdate,
-	initialAmount,
-	period,
-	growthRate,
-	monthlyContribution,
-}) => {
+const VariablesFormCompound = ({ onUpdate, initialAmount, period, growthRate, monthlyContribution }) => {
 	const [state, setState] = React.useState({
 		initialAmount: initialAmount,
 		period: period,

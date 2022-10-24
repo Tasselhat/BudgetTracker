@@ -15,13 +15,17 @@ const controller = new AbortController();
 export const Dashboard = () => {
 	const [budget, setBudget] = useState();
 	const [graphData, setGraphData] = useState(defaultState);
+
 	const grossIncomeRef = useRef();
 	const errRef = useRef();
 
-	const [compoundSavings, setCompoundSavings] = useState("");
 	const [grossIncome, setGrossIncome] = useState("");
-	const [savingAmount, setSavingAmount] = useState();
 	const [grossIncomeFocus, setGrossIncomeFocus] = useState(false);
+
+	const [percentOfIncomeBeingSaved, setPercentOfIncomeBeingSaved] = useState();
+	
+	const [savingAmount, setSavingAmount] = useState();
+	const [compoundSavings, setCompoundSavings] = useState("");
 
 	const [errMsg, setErrMsg] = useState("");
 
@@ -40,6 +44,7 @@ export const Dashboard = () => {
 				});
 				console.log(response.data);
 				isMounted && setBudget(response.data);
+
 				const compoundInterest = (principal, add, years, rate) => {
 					let princ = principal;
 					for (let i = 1; i <= 12 * years; i++) {
@@ -48,6 +53,7 @@ export const Dashboard = () => {
 					}
 					if (princ > 0) setCompoundSavings(princ.toFixed(2));
 				};
+
 				const budgetObject = response.data;
 				const income = budgetObject.income;
 				const savingsObject = budgetObject.saving;
@@ -101,6 +107,7 @@ export const Dashboard = () => {
 						0.07
 					);
 				}
+				setPercentOfIncomeBeingSaved(Math.round(budget?.yearlyGrossIncome/(savingAmount*12)));
 			} catch (err) {
 				console.error(err);
 				navigate("/login", { state: { from: location }, replace: true });
@@ -108,6 +115,8 @@ export const Dashboard = () => {
 		};
 
 		getBudgets();
+
+		grossIncomeRef.current.focus();
 
 		return () => {
 			isMounted = false;
@@ -214,7 +223,15 @@ export const Dashboard = () => {
 					) : (
 						<span> *No savings found* </span>
 					)}
-					from each paycheck. Investing this much with an average yearly return
+					from each paycheck. 
+
+					{percentOfIncomeBeingSaved ? (
+						<span> This is %{percentOfIncomeBeingSaved} of your yearly income. </span>
+					) : (
+						<span> * </span>
+					)}
+					
+					Investing this much with an average yearly return
 					of %7 will result in a total of
 					{compoundSavings ? (
 						<span> ${compoundSavings} </span>

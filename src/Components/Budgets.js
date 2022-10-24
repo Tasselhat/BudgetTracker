@@ -47,6 +47,7 @@ const Budgets = () => {
 							<li key={i}>{budgets?.savings.length} savings</li>
 							<li key={i}>saving {budgets?.saving.percent}% or ${budgets?.saving.total} from each paycheck</li>
 							<li key={i}>${budgets?.yearlyGrossIncome} Gross Income</li>
+							<br />
 						</div>
 					))}
 				</ul>

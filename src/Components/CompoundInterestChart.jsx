@@ -9,13 +9,15 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts";
+import "../css/Dashboard.css";
+
 
 function renderTooltip({ payload }) {
   if (!payload[0]) {
     return;
   }
 
-  return <span>{`£${payload[0].value.toFixed(2)}`}</span>;
+  return <span>{`$${payload[0].value.toFixed(2)}`}</span>;
 }
 
 function CompoundInterestChart({ initialAmount, period, growthRate, monthlyContribution }) {
@@ -42,7 +44,7 @@ function CompoundInterestChart({ initialAmount, period, growthRate, monthlyContr
   return (
     <>
       <h2>Projected Growth</h2>
-      <div style={{ width: "95vw", height: 400 }}>
+      <div className="compound-interest-chart" style={{ width: "95vw", height: 400 }}>
         <ResponsiveContainer>
           <LineChart
             width={500}
