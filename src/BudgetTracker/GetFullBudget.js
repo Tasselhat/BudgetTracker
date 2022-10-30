@@ -226,7 +226,17 @@ const GetFullBudget = (updatedKey) => {
 				)}
 				<br />
 				<br />
-				<button className="reset-button" onClick={(e) => handleDelete(e)}>
+				<button
+					className="reset-button"
+					onClick={(e) => {
+						const confirmBox = window.confirm(
+							"Do you really want to delete your buget? (This cannot be undone)"
+						);
+						if (confirmBox === true) {
+							handleDelete(e);
+						}
+					}}
+				>
 					Reset Budget
 				</button>
 			</article>
