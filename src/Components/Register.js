@@ -220,7 +220,7 @@ export const Register = () => {
 						Already registered?
 						<br />
 						<span className="line">
-							<Link to="/login">
+							<Link to="/">
 								<u>Sign In</u>
 							</Link>
 						</span>
