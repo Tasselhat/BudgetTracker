@@ -68,6 +68,7 @@
 	left: 0;
 	height: 100vh;
 	transition: 350ms;
+	z-index: 1000;
 }
 
 .nav-text {
