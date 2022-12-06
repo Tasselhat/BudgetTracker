@@ -1,107 +1,107 @@
 .budget-submitter-wrapper {
-	background: no-repeat
-		url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	align-items: center;
-	min-height: calc(100vh - 80px);
-	padding: 1rem 0.5rem;
-	color: rgb(170, 176, 182);
+  background: no-repeat
+    url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 1rem 0.5rem;
+  color: rgb(170, 176, 182);
 }
 
 .expense-list-wrapper {
-	background-color: #0a0a29;
-	text-shadow: 1px 2px 3px #040404;
-	padding: 2rem;
-	margin: 30px;
-	border-radius: 6px;
+  background-color: #0a0a29;
+  text-shadow: 1px 2px 3px #040404;
+  padding: 2rem;
+  margin: 30px;
+  border-radius: 6px;
 }
 
 .budget-submission-form {
-	min-width: 50vw;
-	margin: 30px;
-	justify-content: space-around;
-	background-color: #0a0a29;
-	padding: 2rem;
-	border-radius: 6px;
-	display: flex;
-	flex-direction: column;
+  min-width: 50vw;
+  margin: 30px;
+  justify-content: space-around;
+  background-color: #0a0a29;
+  padding: 2rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
 }
 
 .budget-submission-form input {
-	background-color: transparent;
-	color: rgb(144, 151, 158);
-	height: 1.35rem;
-	border-radius: 6px;
-	border-color: white;
+  background-color: transparent;
+  color: rgb(144, 151, 158);
+  height: 1.35rem;
+  border-radius: 6px;
+  border-color: white;
 }
 
 .budget-submission-form input:disabled {
-	opacity: 0.4;
-	border-width: 1px;
+  opacity: 0.4;
+  border-width: 1px;
 }
 
 .budget-submission-form input:hover {
-	opacity: 0.9;
+  opacity: 0.9;
 }
 
 .budget-submission-form input:active {
-	opacity: 0.7;
+  opacity: 0.7;
 }
 
 .budget-submission-form form {
-	margin: 10px;
+  margin: 10px;
 }
 
 .expense-list ::marker {
-	color: transparent;
+  color: transparent;
 }
 
 .expense-list-title {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .saving-list-title {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .delete-button {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	font-weight: 500;
-	font-style: normal;
-	font-size: calc(0.05 * 1vw + 1rem);
-	letter-spacing: 0em;
-	text-transform: none;
-	line-height: 1.6em;
-	border-color: #040404;
-	color: #040404;
-	border-style: solid;
-	cursor: pointer;
-	border-width: 1px;
-	border-radius: 6px;
-	transition: background-color 200ms, color 60ms, padding 200ms, margin 200ms;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-weight: 500;
+  font-style: normal;
+  font-size: calc(0.05 * 1vw + 1rem);
+  letter-spacing: 0em;
+  text-transform: none;
+  line-height: 1.6em;
+  border-color: #040404;
+  color: #040404;
+  border-style: solid;
+  cursor: pointer;
+  border-width: 1px;
+  border-radius: 6px;
+  transition: background-color 200ms, color 60ms, padding 200ms, margin 200ms;
 }
 
 .delete-button:hover {
-	color: #040404;
-	padding: 0.6vh;
-	opacity: 0.9;
-	margin: 0;
-	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
+  color: #040404;
+  padding: 0.6vh;
+  opacity: 0.9;
+  margin: 0;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
 }
 
 .delete-button:active {
-	opacity: 0.6;
+  opacity: 0.6;
 }
 
 @media (max-width: 1200px) {
-	.budget-submitter-wrapper {
-		flex-direction: column;
-		justify-content: space-around;
-	}
+  .budget-submitter-wrapper {
+    flex-direction: column;
+    justify-content: space-around;
+  }
 }

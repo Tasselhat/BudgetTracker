@@ -1,119 +1,119 @@
 .header {
-	margin: 0.5vh 0 0.5vh 0;
-	color: #040404;
+  margin: 0.5vh 0 0.5vh 0;
+  color: #040404;
 }
 
 .tracker-rings-container {
-	background: no-repeat
-		url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: calc(100vh - 80px);
-	padding: 0rem 0.5rem;
+  background: no-repeat
+    url(../images/TasselHat_dollar_bills_floating_around_17529129-3d9b-4f68-8309-9596ec01b529.png);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 0rem 0.5rem;
 }
 
 .chart-container {
-	text-shadow: 1px 2px 3px #161616;
-	padding: 1rem;
-	border-radius: 6px;
-	background: none;
-	width: 75vw;
+  text-shadow: 1px 2px 3px #161616;
+  padding: 1rem;
+  border-radius: 6px;
+  background: none;
+  width: 75vw;
 }
 
 .updateButton {
-	position: absolute;
-	top: 15vh;
-	left: 70vw;
+  position: absolute;
+  top: 15vh;
+  left: 70vw;
 
-	font-weight: 500;
-	font-style: normal;
-	font-size: calc(0.05 * 1vw + 1rem);
-	letter-spacing: 0em;
-	text-transform: none;
-	line-height: 1.6em;
-	border-color: #040404;
-	color: #040404;
-	border-style: solid;
-	cursor: pointer;
-	border-width: 1px;
-	border-radius: 6px;
-	padding: 0.3vw 0.4vw 0.3vw 0.4vw;
-	margin-right: 0.2vw;
-	margin-left: 0.2vw;
-	margin-top: 0.2vw;
-	margin-bottom: 0.2vw;
-	transition: background-color 200ms, color 60ms, padding 200ms, margin 200ms;
+  font-weight: 500;
+  font-style: normal;
+  font-size: calc(0.05 * 1vw + 1rem);
+  letter-spacing: 0em;
+  text-transform: none;
+  line-height: 1.6em;
+  border-color: #040404;
+  color: #040404;
+  border-style: solid;
+  cursor: pointer;
+  border-width: 1px;
+  border-radius: 6px;
+  padding: 0.3vw 0.4vw 0.3vw 0.4vw;
+  margin-right: 0.2vw;
+  margin-left: 0.2vw;
+  margin-top: 0.2vw;
+  margin-bottom: 0.2vw;
+  transition: background-color 200ms, color 60ms, padding 200ms, margin 200ms;
 }
 
 .updateButton:hover {
-	color: #040404;
-	padding-left: 0.6vw;
-	padding-right: 0.6vw;
-	padding-top: 0.5vw;
-	padding-bottom: 0.5vw;
-	opacity: 0.9;
-	margin-left: 0;
-	margin-right: 0;
-	margin-top: 0;
-	margin-bottom: 0;
-	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
+  color: #040404;
+  padding-left: 0.6vw;
+  padding-right: 0.6vw;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+  opacity: 0.9;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
 }
 
 .updateButton:active {
-	opacity: 0.6;
+  opacity: 0.6;
 }
 
 .changeButton {
-	position: absolute;
-	top: 60vh;
-	left: 70vw;
+  position: absolute;
+  top: 60vh;
+  left: 70vw;
 
-	font-weight: 500;
-	font-style: normal;
-	font-size: calc(0.05 * 1vw + 1rem);
-	letter-spacing: 0em;
-	text-transform: none;
-	line-height: 1.6em;
-	border-color: #040404;
-	color: #040404;
-	border-style: solid;
-	cursor: pointer;
-	border-width: 1px;
-	border-radius: 6px;
-	padding: 0.3vw 0.4vw 0.3vw 0.4vw;
-	margin-right: 0.2vw;
-	margin-left: 0.2vw;
-	margin-top: 0.2vw;
-	margin-bottom: 0.2vw;
-	transition: background-color 200ms, color 60ms, padding 200ms, margin 200ms;
+  font-weight: 500;
+  font-style: normal;
+  font-size: calc(0.05 * 1vw + 1rem);
+  letter-spacing: 0em;
+  text-transform: none;
+  line-height: 1.6em;
+  border-color: #040404;
+  color: #040404;
+  border-style: solid;
+  cursor: pointer;
+  border-width: 1px;
+  border-radius: 6px;
+  padding: 0.3vw 0.4vw 0.3vw 0.4vw;
+  margin-right: 0.2vw;
+  margin-left: 0.2vw;
+  margin-top: 0.2vw;
+  margin-bottom: 0.2vw;
+  transition: background-color 200ms, color 60ms, padding 200ms, margin 200ms;
 }
 
 .changeButton:hover {
-	color: #040404;
-	padding-left: 0.6vw;
-	padding-right: 0.6vw;
-	padding-top: 0.5vw;
-	padding-bottom: 0.5vw;
-	opacity: 0.9;
-	margin-left: 0;
-	margin-right: 0;
-	margin-top: 0;
-	margin-bottom: 0;
-	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
+  color: #040404;
+  padding-left: 0.6vw;
+  padding-right: 0.6vw;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+  opacity: 0.9;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
 }
 
 .changeButton:active {
-	opacity: 0.6;
+  opacity: 0.6;
 }
 
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .graph {
-	height: 40vh;
-	width: 70vw;
+  height: 40vh;
+  width: 70vw;
 }
