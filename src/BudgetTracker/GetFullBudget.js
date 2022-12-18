@@ -69,9 +69,11 @@ const GetFullBudget = (updatedKey) => {
       setKey();
     } catch (err) {
       if (!err?.response) {
+        setErrMsg(err);
         console.error(err);
         //navigate("/login", { state: { from: location }, replace: true });
       } else {
+        setErrMsg(err);
         console.error(err);
         //navigate("/login", { state: { from: location }, replace: true });
       }
@@ -91,9 +93,11 @@ const GetFullBudget = (updatedKey) => {
       setKey();
     } catch (err) {
       if (!err?.response) {
+        setErrMsg(err);
         console.error(err);
         //navigate("/login", { state: { from: location }, replace: true });
       } else {
+        setErrMsg(err);
         console.error(err);
         //navigate("/login", { state: { from: location }, replace: true });
       }
@@ -124,11 +128,7 @@ const GetFullBudget = (updatedKey) => {
   return (
     <div className="expense-list-wrapper">
       <article className="expense-list">
-        <p
-          ref={errRef}
-          className={errMsg ? "errmsg" : "offscreen"}
-          aria-live="assertive"
-        >
+        <p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
           {errMsg}
         </p>
         <h2>Current Income:</h2>
