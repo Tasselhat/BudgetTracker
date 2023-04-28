@@ -15,7 +15,7 @@ To install the Budget Tracker Web App, follow these steps:
 3. Run npm install to install the dependencies
 4. Run npm start to start the app
 
-Usage
+# Usage
 To use the Budget Tracker Web App, follow these steps:
 
 1. Sign up for an account or log in
