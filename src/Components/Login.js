@@ -16,7 +16,7 @@ export const Login = () => {
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSucess] = useState(false); // navigate to a new page with react router for a successful login later
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -44,7 +44,7 @@ export const Login = () => {
       setAuth({ user, pwd, roles, accessToken });
       setUser("");
       setPwd("");
-      setSucess(true);
+      setSuccess(true);
       setTimeout(() => {
         navigate(from, { replace: true });
       }, 1500);
@@ -78,7 +78,7 @@ export const Login = () => {
         <section className="loginSection">
           <p
             ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
+            className={errMsg ? "errMsg" : "offscreen"}
             aria-live="assertive"
           >
             {errMsg}

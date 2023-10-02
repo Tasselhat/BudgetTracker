@@ -24,7 +24,7 @@ export const Register = () => {
   const [matchFocus, setMatchFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSucess] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -71,7 +71,7 @@ export const Register = () => {
       console.log(response.data);
       console.log(response.accessToken);
       console.log(JSON.stringify(response));
-      setSucess(true);
+      setSuccess(true);
       // clear input fields of registration to stop multiple post requests
       setUser("");
       setPwd("");
@@ -104,7 +104,7 @@ export const Register = () => {
         <section className="registrationSection">
           <p
             ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
+            className={errMsg ? "errMsg" : "offscreen"}
             aria-live="assertive"
           >
             {errMsg}
@@ -142,7 +142,7 @@ export const Register = () => {
               <FaIcons.FaInfoCircle />
               4 to 24 characters. <br />
               Must begin with a letter. <br />
-              Letters, Numbers, underscores, hypens are allowed.
+              Letters, Numbers, underscores, hyphens are allowed.
             </p>
             <label htmlFor="password">
               Password:
@@ -197,12 +197,12 @@ export const Register = () => {
               onChange={(e) => setMatchPwd(e.target.value)}
               required
               aria-invalid={validMatch ? "false" : "true"}
-              aria-describedby="confirmnote"
+              aria-describedby="confirmNote"
               onFocus={() => setMatchFocus(true)}
               onBlur={() => setMatchFocus(false)}
             />
             <p
-              id="confirmnote"
+              id="confirmNote"
               className={
                 matchFocus && !validMatch ? "instructions" : "offscreen"
               }
